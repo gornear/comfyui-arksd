@@ -77,6 +77,24 @@ except ImportError as exc:  # pragma: no cover - only hit outside ComfyUI
     LOGGER.debug("[ArkSD] task nodes not registered: %s", exc)
 
 try:
+    from .nodes.nodes_llm import ArkSDLLM, ArkSDTexts
+
+    NODE_CLASS_MAPPINGS.update(
+        {
+            "ArkSD_LLM": ArkSDLLM,
+            "ArkSD_Texts": ArkSDTexts,
+        }
+    )
+    NODE_DISPLAY_NAME_MAPPINGS.update(
+        {
+            "ArkSD_LLM": "ArkSD LLM",
+            "ArkSD_Texts": "ArkSD Texts",
+        }
+    )
+except ImportError as exc:  # pragma: no cover - only hit outside ComfyUI
+    LOGGER.debug("[ArkSD] LLM nodes not registered: %s", exc)
+
+try:
     from .nodes.routes import register_routes
 
     register_routes()

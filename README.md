@@ -83,6 +83,28 @@ value. Disconnect it, or turn `return_last_frame` on.
 | **ArkSD Draft to Video** | Turn a draft task id into the 1080p final |
 | **ArkSD Query Task** | Fetch one task by id and wait for its video |
 | **ArkSD Task List** | Browse, auto-refresh, and cancel tasks (UI only) |
+| **ArkSD LLM** | Call Ark's chat completions endpoint; returns text, up to 5 images |
+| **ArkSD Texts** | Concatenate up to 10 text inputs into one string |
+
+## Text generation
+
+**ArkSD LLM** calls Ark's OpenAI-compatible `/chat/completions` endpoint. The
+endpoint is fixed to Ark and the credential is taken from `api_keys.json`, so
+there is no api url or api key widget and no secret ends up in the workflow
+file. Pick a vision-capable model if you connect images.
+
+Inputs mirror the reference node: `system_prompt`, `prompt`, `temperature`,
+`top_k`, `top_p`, `presence_penalty`, `frequency_penalty`, `max_tokens`,
+`timeout`, up to 5 optional images, and three image-encoding limits. `top_k` is
+only sent when it is greater than 0. Images are converted to JPEG and shrunk
+until they fit `image_max_kb`.
+
+**ArkSD Texts** concatenates up to 10 text slots with an optional delimiter,
+which is handy for building a prompt out of generated pieces.
+
+```
+ArkSD LLM ──text──> ArkSD Texts ──text──> ArkSD Seedance 2.5.prompt
+```
 
 ## Reference inputs
 
