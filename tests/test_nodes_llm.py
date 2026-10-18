@@ -195,3 +195,10 @@ def test_image_encoder_keeps_payload_under_limit():
     payload = uri.split(",", 1)[1]
     assert len(base64.b64decode(payload)) <= 64 * 1024 + 4096
     assert uri.startswith("data:image/jpeg;base64,")
+
+
+def test_llm_model_defaults_to_empty():
+    """The model id is account specific, so the user must fill it in."""
+    schema = nodes_llm.ArkSDLLM.define_schema()
+    model_input = next(i for i in schema.inputs if i.id == "model")
+    assert model_input.default == ""

@@ -132,7 +132,7 @@ class ArkSDLLM(comfy_io.ComfyNode):
                 ),
                 comfy_io.String.Input(
                     "model",
-                    default="doubao-seed-2-0-pro",
+                    default="",
                     tooltip="Ark model id or endpoint id. Pick a vision model to use images.",
                 ),
                 comfy_io.String.Input(
