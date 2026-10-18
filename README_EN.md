@@ -1,6 +1,6 @@
 # comfyui-arksd
 
-English | [中文说明](README-ZH_CN.md)
+English | [中文说明](README.md)
 
 ComfyUI nodes for **Volcengine Ark (火山方舟) Seedance 2.x** video generation.
 

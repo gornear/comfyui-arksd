@@ -1,6 +1,6 @@
 # comfyui-arksd
 
-[English](README.md) | 中文说明
+[English](README_EN.md) | 中文说明
 
 用于 **火山方舟（Volcengine Ark）Seedance 2.x** 视频生成的 ComfyUI 节点。
 
