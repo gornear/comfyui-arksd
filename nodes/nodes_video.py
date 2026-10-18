@@ -14,6 +14,7 @@ Common behaviour:
 * Outputs are the video, the seed actually used, and the task id.
 """
 
+import base64
 import io as _io
 import logging
 
@@ -27,6 +28,8 @@ from .constants import (
     DEFAULT_POLL_INTERVAL,
     DEFAULT_TIMEOUT,
     DRAFT_RESOLUTION,
+    VIDEO_MAX_BYTES,
+    VIDEO_MIME,
     MAX_TIMEOUT,
     MIN_TIMEOUT,
     MODELS,
@@ -68,6 +71,66 @@ def _normalize_images(images: list) -> list:
         else:
             result.append(image_utils.normalize_image(value, f"reference_image_{index}"))
     return result
+
+
+def _video_duration_seconds(video) -> float | None:
+    """Return the video length in seconds, or None when it cannot be read."""
+    try:
+        components = video.get_components()
+        frame_rate = float(components.frame_rate)
+        frames = int(components.images.shape[0])
+    except (AttributeError, TypeError, ValueError):
+        return None
+    if frame_rate <= 0:
+        return None
+    return frames / frame_rate
+
+
+def _normalize_video(value, index: int, spec) -> str:
+    """Return a reference video as a URL, an asset id, or a base64 data URI.
+
+    A ``STRING`` is an ``asset://`` id or a public URL and is returned as-is.
+    A local ``VIDEO`` is inlined as base64, but only when it fits both gates:
+
+    * at most :data:`VIDEO_MAX_BYTES`, because the whole request body is capped
+      at 64 MB and Ark advises against base64 for large files;
+    * no longer than the model's own maximum output duration, since a reference
+      video longer than that can never be used.
+
+    Refusing here, with the real limit in the message, is better than letting
+    Ark reject an oversized body.
+    """
+    if isinstance(value, str):
+        return value
+
+    duration = _video_duration_seconds(value)
+    if duration is not None and duration > spec.duration_max:
+        raise ValueError(
+            f"ArkSD: reference_video_{index} is {duration:.1f}s long, but "
+            f"{spec.model_id} accepts reference videos up to {spec.duration_max}s. "
+            f"Trim the video or use a different model."
+        )
+
+    source = value.get_stream_source()
+    if hasattr(source, "read"):
+        payload = source.read()
+    else:
+        with open(source, "rb") as handle:
+            payload = handle.read()
+
+    if len(payload) > VIDEO_MAX_BYTES:
+        raise ValueError(
+            f"ArkSD: reference_video_{index} is {len(payload) / (1024 * 1024):.1f} MB, "
+            f"but an inlined reference video is limited to "
+            f"{VIDEO_MAX_BYTES // (1024 * 1024)} MB. Upload it to your Ark asset "
+            f"library and use an asset:// id, or host it at a public URL."
+        )
+
+    encoded = base64.b64encode(payload).decode("ascii")
+    LOGGER.info(
+        "[ArkSD] reference_video_%d inlined (%d KB base64)", index, len(encoded) // 1024
+    )
+    return f"data:{VIDEO_MIME};base64,{encoded}"
 
 
 def _decode_last_frame(data: bytes):
@@ -150,7 +213,8 @@ async def _run(spec, params: dict) -> io.NodeOutput:
     """Submit a task and either wait for it or return the task id."""
     api_key = config.get_api_key(params["api_key_name"])
     images = _normalize_images(params["images"])
-    body = build_body(spec, {**params, "images": images})
+    videos = [_normalize_video(v, i, spec) for i, v in enumerate(params["videos"])]
+    body = build_body(spec, {**params, "images": images, "videos": videos})
 
     LOGGER.info(
         "[ArkSD] submitting %s (resolution=%s, duration=%s, refs=%d/%d/%d)",
@@ -158,7 +222,7 @@ async def _run(spec, params: dict) -> io.NodeOutput:
         body["resolution"],
         body["duration"],
         len(images),
-        len(params["videos"]),
+        len(videos),
         len(params["audios"]),
     )
     task_id = await client.create_task(api_key, body)
@@ -297,12 +361,17 @@ def _common_inputs(spec) -> list:
             "reference_videos",
             optional=True,
             template=io.Autogrow.TemplatePrefix(
-                input=io.String.Input("reference_video"),
+                # VIDEO comes from LoadVideo; STRING covers an asset:// id or a
+                # public URL.
+                input=io.MultiType.Input("reference_video", [io.Video, io.String]),
                 prefix="reference_video_",
                 min=0,
                 max=spec.max_videos,
             ),
-            tooltip="Reference videos: asset:// or a public URL. Base64 is not used here.",
+            tooltip=(
+                "Reference videos: a ComfyUI VIDEO (inlined as base64, up to 30 MB "
+                "and the model's max duration), or an asset:// / URL string."
+            ),
         ),
         io.Autogrow.Input(
             "reference_audios",

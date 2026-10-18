@@ -98,6 +98,13 @@ IMAGE_MAX_RATIO = 2.5
 # Ark limits for the whole request body.
 REQUEST_MAX_BYTES = 64 * 1024 * 1024
 
+# A reference video sent inline as base64 must leave room in the 64 MB request
+# body for the rest of the payload, so it is capped at 30 MB.
+VIDEO_MAX_BYTES = 30 * 1024 * 1024
+
+# Container Ark assumes for an inline video. Ark accepts mp4 and mov.
+VIDEO_MIME = "video/mp4"
+
 # Task polling defaults.
 DEFAULT_TIMEOUT = 1800
 MIN_TIMEOUT = 300

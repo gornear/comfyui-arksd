@@ -59,7 +59,10 @@ def test_reference_slot_types_are_multitype():
     assert isinstance(image_template, io.MultiType.Input)
     assert "IMAGE" in image_template.get_io_type()
     assert "STRING" in image_template.get_io_type()
-    assert by_id["reference_videos"].template.input.get_io_type() == "STRING"
+    video_template = by_id["reference_videos"].template.input
+    assert isinstance(video_template, io.MultiType.Input)
+    assert "VIDEO" in video_template.get_io_type()
+    assert "STRING" in video_template.get_io_type()
     assert by_id["reference_audios"].template.input.get_io_type() == "STRING"
 
 

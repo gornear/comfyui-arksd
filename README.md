@@ -118,13 +118,28 @@ ArkSD LLM ──text──> ArkSD Texts ──text──> ArkSD Seedance 2.5.pro
 | Slot | Accepts | Notes |
 |---|---|---|
 | `reference_image_N` | `IMAGE` or `STRING` | A `LoadImage` output is converted to base64 automatically |
-| `reference_video_N` | `STRING` | `asset://<id>` or a public URL |
+| `reference_video_N` | `VIDEO` or `STRING` | A `LoadVideo` output is inlined as base64 within the limits below; a string is an `asset://<id>` or a public URL |
 | `reference_audio_N` | `STRING` | `asset://<id>` or a public URL |
 
-**Video and audio cannot be sent as local files.** Ark caps the request body at
-64 MB and advises against base64 for large files, so a local video or audio
-file must first be uploaded to your Ark asset library (or hosted at a public
-URL). This is an Ark API limit, not a limitation of these nodes.
+### Local video references
+
+A reference video can be connected straight from **Load Video**. It is inlined
+as base64 only when it passes both gates:
+
+| Gate | Limit |
+|---|---|
+| File size | 30 MB |
+| Duration | the model's own maximum output duration (Seedance 2.0 / Fast / Mini: 15 s, Seedance 2.5: 30 s) |
+
+A video over either limit is refused before the request is sent, with the real
+limit named in the error. Upload it to your Ark asset library and pass the
+`asset://` id, or host it at a public URL, to use longer or larger footage.
+The 30 MB cap exists because Ark limits the whole request body to 64 MB and
+advises against base64 for large files.
+
+**Audio references still require a string.** There is no ComfyUI audio type
+that maps onto what Ark accepts, so upload the audio to the asset library or
+host it at a public URL.
 
 Reference limits per model:
 
