@@ -80,3 +80,33 @@ def test_autogrow_maxima_match_model():
     assert by_id20["reference_images"].template.max == 9
     assert by_id20["reference_videos"].template.max == 3
     assert by_id20["reference_audios"].template.max == 3
+
+
+# ------------------------------------------------------------- defaults
+
+
+def _input_defaults(node_cls):
+    return {i.id: getattr(i, "default", None) for i in node_cls.define_schema().inputs}
+
+
+def test_all_generation_nodes_default_duration_to_5():
+    for node_cls in (
+        nodes_video.ArkSDSeedance25,
+        nodes_video.ArkSDSeedance20,
+        nodes_video.ArkSDSeedance20Fast,
+        nodes_video.ArkSDSeedance20Mini,
+    ):
+        assert _input_defaults(node_cls)["duration"] == 5, node_cls.__name__
+
+
+def test_seedance_25_defaults_to_draft():
+    assert _input_defaults(nodes_video.ArkSDSeedance25)["draft"] is True
+
+
+def test_other_models_have_no_draft_input():
+    for node_cls in (
+        nodes_video.ArkSDSeedance20,
+        nodes_video.ArkSDSeedance20Fast,
+        nodes_video.ArkSDSeedance20Mini,
+    ):
+        assert "draft" not in _input_defaults(node_cls)

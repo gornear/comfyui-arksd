@@ -68,6 +68,9 @@ generation nodes work with just `api_keys.json`.
 
 ## Nodes
 
+Every generation node defaults to `duration` = 5 seconds; use `-1` to let the
+model pick, or set it explicitly.
+
 Each generation node outputs `VIDEO`, `seed` (INT), `task_id` (STRING), and
 `last_frame` (IMAGE). `last_frame` is only filled when `return_last_frame` is
 on. When it is off, the `last_frame` output is **blocked**: any node connected
@@ -230,8 +233,9 @@ Ark accepts only one group type per request, so `All` costs two API calls.
 
 ### Draft mode (Seedance 2.5)
 
-Turning on `draft` locks `resolution` to `480p` in the node UI, because Ark
-rejects any other resolution for a draft.
+`draft` is **on by default** for Seedance 2.5. While it is on, `resolution` is
+locked to `480p` in the node UI, because Ark rejects any other resolution for a
+draft. Turn it off to generate the final video directly.
 
 ```
 ArkSD Seedance 2.5 (draft=true, resolution=480p)

@@ -521,7 +521,7 @@ class ArkSDSeedance25(io.ComfyNode):
                 ),
                 io.Boolean.Input(
                     "draft",
-                    default=False,
+                    default=True,
                     tooltip=(
                         "Draft mode: generate a 480p preview first. Feed the task id into "
                         "ArkSD Draft to Video to produce the 1080p final."

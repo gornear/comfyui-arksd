@@ -64,6 +64,9 @@ pip install -r comfyui-arksd/requirements.txt
 
 ## 节点一览
 
+所有生成节点的 `duration` 默认都是 5 秒；填 `-1` 表示让模型自行决定，也可以
+直接指定具体秒数。
+
 每个生成节点都会输出 `VIDEO`、`seed`（整数）、`task_id`（字符串）和
 `last_frame`（图像）。`last_frame` 仅在开启 `return_last_frame` 时才有值。
 未开启时该输出会被**阻断**：连在它下游的节点会被跳过并给出说明，而不是拿着
@@ -213,8 +216,8 @@ ArkSD Seedance 2.5 ──VIDEO──> SaveVideo
 
 ### 样片模式（Seedance 2.5）
 
-开启 `draft` 会把节点界面上的 `resolution` 锁定为 `480p`，因为方舟对样片只
-接受这一种分辨率。
+Seedance 2.5 的 `draft` **默认开启**。开启期间节点界面上的 `resolution` 会
+被锁定为 `480p`，因为方舟对样片只接受这一种分辨率。关闭它即可直接生成成片。
 
 ```
 ArkSD Seedance 2.5（draft=true, resolution=480p）
