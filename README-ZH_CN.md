@@ -78,7 +78,7 @@ pip install -r comfyui-arksd/requirements.txt
 | **ArkSD Seedance 2.0 Fast** | 更快更便宜，仅 480p/720p |
 | **ArkSD Seedance 2.0 Mini** | 成本最低，仅 480p/720p |
 | **ArkSD Draft to Video** | 把样片任务 ID 转成 1080p 成片 |
-| **ArkSD Query Task** | 按任务 ID 查询并等待出片 |
+| **ArkSD Query Task** | 按任务 ID 查询并等待出片；输出视频、种子、状态和该任务 ID |
 | **ArkSD Task List** | 浏览、自动刷新、取消任务（纯 UI） |
 | **ArkSD LLM** | 调用方舟对话接口，返回文本，最多 5 张图 |
 | **ArkSD Texts** | 把最多 10 段文本拼接成一段 |

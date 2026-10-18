@@ -81,6 +81,9 @@ class ArkSDQueryTask(io.ComfyNode):
                 io.Video.Output("video"),
                 io.Int.Output("seed"),
                 io.String.Output("status"),
+                io.String.Output(
+                    "task_id", tooltip="The task id this node queried, passed through."
+                ),
             ],
         )
 
@@ -110,7 +113,10 @@ class ArkSDQueryTask(io.ComfyNode):
         data = await client.download_video(video_url)
         LOGGER.info("[ArkSD] queried task %s (seed=%s)", task_id, task.get("seed"))
         return io.NodeOutput(
-            VideoFromFile(_io.BytesIO(data)), task.get("seed"), task.get("status")
+            VideoFromFile(_io.BytesIO(data)),
+            task.get("seed"),
+            task.get("status"),
+            task_id,
         )
 
 

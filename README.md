@@ -83,7 +83,7 @@ value. Disconnect it, or turn `return_last_frame` on.
 | **ArkSD Seedance 2.0 Fast** | Cheaper and faster, 480p/720p |
 | **ArkSD Seedance 2.0 Mini** | Lowest cost, 480p/720p |
 | **ArkSD Draft to Video** | Turn a draft task id into the 1080p final |
-| **ArkSD Query Task** | Fetch one task by id and wait for its video |
+| **ArkSD Query Task** | Fetch one task by id and wait for its video; outputs the video, seed, status, and the task id |
 | **ArkSD Task List** | Browse, auto-refresh, and cancel tasks (UI only) |
 | **ArkSD LLM** | Call Ark's chat completions endpoint; returns text, up to 5 images |
 | **ArkSD Texts** | Concatenate up to 10 text inputs into one string |
