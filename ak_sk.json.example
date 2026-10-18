@@ -1,0 +1,8 @@
+[
+  {
+    "customName": "Ark-AK",
+    "accessKey": "your-access-key-here",
+    "secretKey": "your-secret-key-here",
+    "region": "cn-beijing"
+  }
+]
