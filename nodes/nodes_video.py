@@ -147,8 +147,8 @@ def _normalize_audio(value, index: int, spec) -> str:
     mismatch to resolve: the waveform is encoded to 16-bit PCM WAV and inlined.
 
     The duration gate matches the video one (2.5 allows 30 s, the 2.0 family
-    15 s). The size gate exists because WAV is uncompressed and Ark caps a
-    single reference audio at 15 MB.
+    15 s). The size gate exists because WAV is uncompressed, which inflates an
+    already-decoded waveform well past Ark's 15 MB limit on the original file.
     """
     if isinstance(value, str):
         return value
@@ -470,7 +470,7 @@ def _common_inputs(spec) -> list:
                 max=spec.max_audios,
             ),
             tooltip=(
-                "Reference audio: a ComfyUI AUDIO (inlined as WAV, up to 15 MB and "
+                "Reference audio: a ComfyUI AUDIO (inlined as WAV, up to 30 MB and "
                 "the model's max duration), or an asset:// / URL string."
             ),
         ),

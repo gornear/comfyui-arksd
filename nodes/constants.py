@@ -105,9 +105,11 @@ VIDEO_MAX_BYTES = 30 * 1024 * 1024
 # Container Ark assumes for an inline video. Ark accepts mp4 and mov.
 VIDEO_MIME = "video/mp4"
 
-# Ark caps a single reference audio at 15 MB. An in-memory waveform is encoded
-# as uncompressed WAV, so this binds sooner than it does for video.
-AUDIO_MAX_BYTES = 15 * 1024 * 1024
+# Ark caps a single reference audio at 15 MB for the compressed original, but
+# an in-memory waveform is encoded as uncompressed WAV, which inflates the
+# payload. The limit is relaxed to 30 MB so a realistic clip still fits while
+# leaving room in the 64 MB request body.
+AUDIO_MAX_BYTES = 30 * 1024 * 1024
 AUDIO_MIME = "audio/wav"
 AUDIO_SAMPLE_WIDTH = 2  # 16-bit PCM
 

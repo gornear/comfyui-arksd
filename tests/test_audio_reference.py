@@ -110,3 +110,8 @@ def test_accepts_sampler_rate_key():
     uri = nodes_video._normalize_audio(audio, 0, MODELS["seedance_2_5"])
     with _decode_wav(uri) as handle:
         assert handle.getframerate() == 16000
+
+
+def test_audio_size_cap_is_30_mb():
+    """Raised from 15 MB so realistic WAV references fit."""
+    assert nodes_video.AUDIO_MAX_BYTES == 30 * 1024 * 1024

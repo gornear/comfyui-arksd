@@ -148,12 +148,13 @@ WAV and inlined as base64.
 | Gate | Limit |
 |---|---|
 | Duration | the model's maximum output duration (Seedance 2.0 / Fast / Mini: 15 s, Seedance 2.5: 30 s) |
-| Encoded size | 15 MB |
+| Encoded size | 30 MB |
 
 WAV is uncompressed, so the size cap binds sooner than it does for video: a
-stereo 44.1 kHz clip of about 90 seconds already exceeds it. Trim the clip,
-lower the sample rate, or upload it to your Ark asset library and pass the
-`asset://` id.
+stereo 44.1 kHz clip of about three minutes reaches 30 MB. Given the duration
+gate above, normal references fit comfortably; trim the clip, lower the sample
+rate, or upload it to your Ark asset library and pass the `asset://` id if one
+does not.
 
 Reference limits per model:
 
