@@ -27,6 +27,9 @@ REQUEST_TIMEOUT = httpx.Timeout(connect=10.0, read=60.0, write=60.0, pool=10.0)
 # Task states that mean the task will not change again.
 TERMINAL_STATUSES = {"succeeded", "failed", "cancelled", "expired"}
 
+# Model lifecycle states that make a catalog entry unusable.
+RETIRED_STATUSES = {"Shutdown", "Retiring"}
+
 # Error codes that usually mean the model was never opened on this account.
 _MODEL_HINTS = {"ModelNotOpen", "AccessDenied", "InvalidParameter"}
 
@@ -109,11 +112,14 @@ async def list_models(api_key: str) -> list[dict]:
     opened; Ark exposes no endpoint for the latter. A model that appears here
     can still answer ``ModelNotOpen`` when submitted, which the caller reports
     with a console hint.
+
+    Retired and retiring models are dropped: picking one only leads to a
+    request that fails or soon will.
     """
     payload = await _request("GET", "/models", api_key)
     models = []
     for entry in payload.get("data") or []:
-        if entry.get("status") == "Shutdown":
+        if entry.get("status") in RETIRED_STATUSES:
             continue
         model_id = str(entry.get("id") or "")
         if not model_id:

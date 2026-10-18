@@ -10,7 +10,8 @@ def _payload(*models):
     return {"data": list(models)}
 
 
-def test_list_models_drops_shutdown_entries():
+def test_list_models_drops_retired_and_retiring_entries():
+    """A model on its way out is not worth offering: it will fail soon anyway."""
     payload = _payload(
         {"id": "live-model", "name": "live", "status": None, "domain": "LLM"},
         {"id": "dead-model", "name": "dead", "status": "Shutdown", "domain": "LLM"},
@@ -19,8 +20,7 @@ def test_list_models_drops_shutdown_entries():
     with patch.object(client, "_request", return_value=payload):
         models = asyncio.run(client.list_models("k"))
 
-    ids = [m["id"] for m in models]
-    assert ids == ["live-model", "retiring-model"]
+    assert [m["id"] for m in models] == ["live-model"]
 
 
 def test_list_models_sorts_by_domain():

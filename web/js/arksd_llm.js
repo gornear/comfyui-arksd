@@ -52,8 +52,7 @@ function buildPicker(node) {
 		for (const [domain, group] of [...byDomain.entries()].sort()) {
 			const groupEl = el("optgroup", { label: domain });
 			for (const item of group) {
-				const label = item.status ? `${item.id} (${item.status})` : item.id;
-				groupEl.append(el("option", { value: item.id }, label));
+				groupEl.append(el("option", { value: item.id }, item.id));
 			}
 			select.append(groupEl);
 		}

@@ -94,9 +94,9 @@ there is no api url or api key widget and no secret ends up in the workflow
 file.
 
 The `model` field starts empty. A dropdown next to it lists the Ark model
-catalog (from `GET /api/v3/models`, grouped by domain, retired models hidden);
-picking one fills the field, and you can still type any id or an `ep-` endpoint
-id by hand. The catalog is platform-wide, not the set of models your account
+catalog (from `GET /api/v3/models`, grouped by domain, with `Shutdown` and
+`Retiring` models hidden); picking one fills the field, and you can still type
+any id or an `ep-` endpoint id by hand. The catalog is platform-wide, not the set of models your account
 has opened: choosing one you have not opened makes the request fail with
 `ModelNotOpen`, and the error tells you to open it in the Ark console.
 
