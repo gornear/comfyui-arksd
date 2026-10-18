@@ -8,10 +8,12 @@ Common behaviour:
 
 * ``reference_image_N`` accepts an ``IMAGE`` tensor (converted to base64) or a
   ``STRING`` (``asset://<id>`` or a public URL).
-* ``reference_video_N`` and ``reference_audio_N`` accept only a ``STRING``,
-  because Ark caps the request body at 64 MB and advises against base64 for
-  large files.
-* Outputs are the video, the seed actually used, and the task id.
+* ``reference_video_N`` accepts a ``VIDEO`` (inlined as base64 within the size
+  and duration gates in ``_normalize_video``) or a ``STRING``.
+* ``reference_audio_N`` accepts an ``AUDIO`` (encoded to WAV within the gates in
+  ``_normalize_audio``) or a ``STRING``.
+* Outputs are the video, the seed actually used, the task id, and the last
+  frame.
 """
 
 import base64
