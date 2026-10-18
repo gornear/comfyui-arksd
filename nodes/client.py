@@ -102,6 +102,35 @@ async def _request(method: str, path: str, api_key: str, **kwargs) -> dict:
     return response.json()
 
 
+async def list_models(api_key: str) -> list[dict]:
+    """Return the Ark model catalog, minus retired models.
+
+    This is the platform-wide catalog, not the set of models this account has
+    opened; Ark exposes no endpoint for the latter. A model that appears here
+    can still answer ``ModelNotOpen`` when submitted, which the caller reports
+    with a console hint.
+    """
+    payload = await _request("GET", "/models", api_key)
+    models = []
+    for entry in payload.get("data") or []:
+        if entry.get("status") == "Shutdown":
+            continue
+        model_id = str(entry.get("id") or "")
+        if not model_id:
+            continue
+        models.append(
+            {
+                "id": model_id,
+                "name": str(entry.get("name") or model_id),
+                "status": str(entry.get("status") or ""),
+                "domain": str(entry.get("domain") or ""),
+            }
+        )
+    models.sort(key=lambda m: (m["domain"], m["id"]))
+    LOGGER.info("[ArkSD] listed %d models", len(models))
+    return models
+
+
 async def create_task(api_key: str, body: dict) -> str:
     """Create a generation task and return its id."""
     payload = await _request("POST", TASKS_PATH, api_key, json=body)

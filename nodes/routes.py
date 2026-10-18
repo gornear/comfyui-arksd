@@ -85,6 +85,25 @@ async def handle_config(request: web.Request) -> web.Response:
     )
 
 
+async def handle_models(request: web.Request) -> web.Response:
+    """Return the Ark model catalog for the model picker."""
+    api_key_name = request.query.get("api_key_name", "")
+    refresh = request.query.get("refresh", "0") == "1"
+    key = f"models|{api_key_name}"
+    if refresh:
+        ASSET_CACHE.invalidate(key)
+    cached = ASSET_CACHE.get(key)
+    if cached is not None:
+        return web.json_response({"items": cached})
+    try:
+        api_key = config.get_api_key(api_key_name)
+        models = await client.list_models(api_key)
+    except (config.ConfigError, client.ArkError) as exc:
+        return _error(str(exc))
+    ASSET_CACHE.put(key, models)
+    return web.json_response({"items": models})
+
+
 async def handle_assets(request: web.Request) -> web.Response:
     ak_sk_name = request.query.get("ak_sk_name", "")
     group_type = request.query.get("group_type", "AIGC")
@@ -176,6 +195,7 @@ def register_routes() -> None:
 
     routes = PromptServer.instance.routes  # noqa: F841 - fails fast if no server
     routes.get("/arksd/config")(handle_config)
+    routes.get("/arksd/models")(handle_models)
     routes.get("/arksd/assets")(handle_assets)
     routes.get("/arksd/asset_groups")(handle_asset_groups)
     routes.get("/arksd/tasks")(handle_tasks)

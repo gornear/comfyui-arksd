@@ -91,7 +91,14 @@ value. Disconnect it, or turn `return_last_frame` on.
 **ArkSD LLM** calls Ark's OpenAI-compatible `/chat/completions` endpoint. The
 endpoint is fixed to Ark and the credential is taken from `api_keys.json`, so
 there is no api url or api key widget and no secret ends up in the workflow
-file. Pick a vision-capable model if you connect images.
+file.
+
+The `model` field starts empty. A dropdown next to it lists the Ark model
+catalog (from `GET /api/v3/models`, grouped by domain, retired models hidden);
+picking one fills the field, and you can still type any id or an `ep-` endpoint
+id by hand. The catalog is platform-wide, not the set of models your account
+has opened: choosing one you have not opened makes the request fail with
+`ModelNotOpen`, and the error tells you to open it in the Ark console.
 
 Inputs mirror the reference node: `system_prompt`, `prompt`, `temperature`,
 `top_k`, `top_p`, `presence_penalty`, `frequency_penalty`, `max_tokens`,
