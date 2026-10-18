@@ -119,7 +119,7 @@ ArkSD LLM ──text──> ArkSD Texts ──text──> ArkSD Seedance 2.5.pro
 |---|---|---|
 | `reference_image_N` | `IMAGE` or `STRING` | A `LoadImage` output is converted to base64 automatically |
 | `reference_video_N` | `VIDEO` or `STRING` | A `LoadVideo` output is inlined as base64 within the limits below; a string is an `asset://<id>` or a public URL |
-| `reference_audio_N` | `STRING` | `asset://<id>` or a public URL |
+| `reference_audio_N` | `AUDIO` or `STRING` | A `LoadAudio` output is inlined as WAV within the limits below; a string is an `asset://<id>` or a public URL |
 
 ### Local video references
 
@@ -137,9 +137,23 @@ limit named in the error. Upload it to your Ark asset library and pass the
 The 30 MB cap exists because Ark limits the whole request body to 64 MB and
 advises against base64 for large files.
 
-**Audio references still require a string.** There is no ComfyUI audio type
-that maps onto what Ark accepts, so upload the audio to the asset library or
-host it at a public URL.
+### Local audio references
+
+A reference audio can be connected straight from **Load Audio**. ComfyUI's
+AUDIO type is an in-memory waveform, so whatever container you loaded (mp3,
+wav, flac, m4a) was already decoded by the loading node: there is no format
+mismatch, and **no ffmpeg is required**. The waveform is encoded to 16-bit PCM
+WAV and inlined as base64.
+
+| Gate | Limit |
+|---|---|
+| Duration | the model's maximum output duration (Seedance 2.0 / Fast / Mini: 15 s, Seedance 2.5: 30 s) |
+| Encoded size | 15 MB |
+
+WAV is uncompressed, so the size cap binds sooner than it does for video: a
+stereo 44.1 kHz clip of about 90 seconds already exceeds it. Trim the clip,
+lower the sample rate, or upload it to your Ark asset library and pass the
+`asset://` id.
 
 Reference limits per model:
 

@@ -63,7 +63,10 @@ def test_reference_slot_types_are_multitype():
     assert isinstance(video_template, io.MultiType.Input)
     assert "VIDEO" in video_template.get_io_type()
     assert "STRING" in video_template.get_io_type()
-    assert by_id["reference_audios"].template.input.get_io_type() == "STRING"
+    audio_template = by_id["reference_audios"].template.input
+    assert isinstance(audio_template, io.MultiType.Input)
+    assert "AUDIO" in audio_template.get_io_type()
+    assert "STRING" in audio_template.get_io_type()
 
 
 def test_autogrow_maxima_match_model():

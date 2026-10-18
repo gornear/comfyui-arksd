@@ -17,6 +17,9 @@ Common behaviour:
 import base64
 import io as _io
 import logging
+import wave
+
+import torch
 
 from comfy_api.latest import io
 
@@ -25,6 +28,9 @@ from comfy_execution.graph_utils import ExecutionBlocker
 
 from . import client, config, image_utils
 from .constants import (
+    AUDIO_MAX_BYTES,
+    AUDIO_MIME,
+    AUDIO_SAMPLE_WIDTH,
     DEFAULT_POLL_INTERVAL,
     DEFAULT_TIMEOUT,
     DRAFT_RESOLUTION,
@@ -133,6 +139,86 @@ def _normalize_video(value, index: int, spec) -> str:
     return f"data:{VIDEO_MIME};base64,{encoded}"
 
 
+def _normalize_audio(value, index: int, spec) -> str:
+    """Return a reference audio as a URL, an asset id, or a base64 data URI.
+
+    ComfyUI's AUDIO value is an in-memory waveform whose source format has
+    already been decoded by whichever loader produced it, so there is no format
+    mismatch to resolve: the waveform is encoded to 16-bit PCM WAV and inlined.
+
+    The duration gate matches the video one (2.5 allows 30 s, the 2.0 family
+    15 s). The size gate exists because WAV is uncompressed and Ark caps a
+    single reference audio at 15 MB.
+    """
+    if isinstance(value, str):
+        return value
+
+    waveform = value["waveform"]
+    # comfy_api declares the key as `sampler_rate`, but LoadAudio and the other
+    # audio helpers emit `sample_rate`. Accept either.
+    sample_rate = int(value.get("sample_rate") or value.get("sampler_rate") or 0)
+
+    if waveform.dim() == 3:
+        channels = int(waveform.shape[1])
+        samples = waveform
+    elif waveform.dim() == 2:
+        channels = int(waveform.shape[0])
+        samples = waveform.unsqueeze(0)
+    else:
+        raise ValueError(
+            f"ArkSD: reference_audio_{index} has an unexpected waveform shape "
+            f"{tuple(waveform.shape)}."
+        )
+
+    frames = int(samples.shape[-1])
+    duration = frames / sample_rate if sample_rate > 0 else 0.0
+    if duration > spec.duration_max:
+        raise ValueError(
+            f"ArkSD: reference_audio_{index} is {duration:.1f}s long, but "
+            f"{spec.model_id} accepts reference audio up to {spec.duration_max}s. "
+            f"Trim it or use a different model."
+        )
+
+    # [1, channels, frames] float 0-1 -> interleaved int16 PCM.
+    pcm = (
+        samples[0]
+        .transpose(0, 1)
+        .clamp(0.0, 1.0)
+        .mul(32767.0)
+        .round()
+        .to("cpu")
+        .to(torch.int16)
+        .numpy()
+        .tobytes()
+    )
+
+    buffer = _io.BytesIO()
+    with wave.open(buffer, "wb") as handle:
+        handle.setnchannels(channels)
+        handle.setsampwidth(AUDIO_SAMPLE_WIDTH)
+        handle.setframerate(sample_rate)
+        handle.writeframes(pcm)
+    payload = buffer.getvalue()
+
+    if len(payload) > AUDIO_MAX_BYTES:
+        raise ValueError(
+            f"ArkSD: reference_audio_{index} encodes to "
+            f"{len(payload) / (1024 * 1024):.1f} MB of WAV, over the "
+            f"{AUDIO_MAX_BYTES // (1024 * 1024)} MB limit. Use a shorter clip, a "
+            f"lower sample rate, or upload it to your Ark asset library and pass "
+            f"an asset:// id."
+        )
+
+    encoded = base64.b64encode(payload).decode("ascii")
+    LOGGER.info(
+        "[ArkSD] reference_audio_%d inlined (%d KB base64, %.1fs)",
+        index,
+        len(encoded) // 1024,
+        duration,
+    )
+    return f"data:{AUDIO_MIME};base64,{encoded}"
+
+
 def _decode_last_frame(data: bytes):
     """Decode a last-frame JPEG into a ComfyUI IMAGE tensor of shape [1, H, W, 3]."""
     import numpy as np
@@ -214,7 +300,8 @@ async def _run(spec, params: dict) -> io.NodeOutput:
     api_key = config.get_api_key(params["api_key_name"])
     images = _normalize_images(params["images"])
     videos = [_normalize_video(v, i, spec) for i, v in enumerate(params["videos"])]
-    body = build_body(spec, {**params, "images": images, "videos": videos})
+    audios = [_normalize_audio(a, i, spec) for i, a in enumerate(params["audios"])]
+    body = build_body(spec, {**params, "images": images, "videos": videos, "audios": audios})
 
     LOGGER.info(
         "[ArkSD] submitting %s (resolution=%s, duration=%s, refs=%d/%d/%d)",
@@ -223,7 +310,7 @@ async def _run(spec, params: dict) -> io.NodeOutput:
         body["duration"],
         len(images),
         len(videos),
-        len(params["audios"]),
+        len(audios),
     )
     task_id = await client.create_task(api_key, body)
 
@@ -377,12 +464,15 @@ def _common_inputs(spec) -> list:
             "reference_audios",
             optional=True,
             template=io.Autogrow.TemplatePrefix(
-                input=io.String.Input("reference_audio"),
+                input=io.MultiType.Input("reference_audio", [io.Audio, io.String]),
                 prefix="reference_audio_",
                 min=0,
                 max=spec.max_audios,
             ),
-            tooltip="Reference audio: asset:// or a public URL.",
+            tooltip=(
+                "Reference audio: a ComfyUI AUDIO (inlined as WAV, up to 15 MB and "
+                "the model's max duration), or an asset:// / URL string."
+            ),
         ),
     ]
 
