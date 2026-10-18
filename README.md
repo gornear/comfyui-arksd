@@ -1,5 +1,7 @@
 # comfyui-arksd
 
+English | [中文说明](README-ZH_CN.md)
+
 ComfyUI nodes for **Volcengine Ark (火山方舟) Seedance 2.x** video generation.
 
 Calls the Ark video generation API directly over async HTTP, with support for
