@@ -5,8 +5,7 @@ English | [中文说明](README.md)
 ComfyUI nodes for **Volcengine Ark (火山方舟) Seedance 2.x** video generation.
 
 Calls the Ark video generation API directly over async HTTP, with support for
-Ark **assets** (`asset://<id>`) as reference images, videos, and audio — the
-capability the older Jimeng-style nodes lack.
+Ark **assets** (`asset://<id>`) as reference images, videos, and audio.
 
 ## Features
 
