@@ -1,8 +1,8 @@
 {
   "id": "c06838b9-acec-4928-b1a7-b780d3e6542d",
   "revision": 0,
-  "last_node_id": 75,
-  "last_link_id": 86,
+  "last_node_id": 76,
+  "last_link_id": 88,
   "nodes": [
     {
       "id": 31,
@@ -82,7 +82,7 @@
         602.375
       ],
       "flags": {},
-      "order": 15,
+      "order": 16,
       "mode": 0,
       "inputs": [
         {
@@ -174,7 +174,7 @@
         58
       ],
       "flags": {},
-      "order": 11,
+      "order": 12,
       "mode": 0,
       "inputs": [
         {
@@ -217,7 +217,7 @@
         58
       ],
       "flags": {},
-      "order": 12,
+      "order": 13,
       "mode": 0,
       "inputs": [
         {
@@ -262,7 +262,7 @@
         138
       ],
       "flags": {},
-      "order": 14,
+      "order": 15,
       "mode": 0,
       "inputs": [
         {
@@ -322,7 +322,7 @@
         772.8427202602006
       ],
       "flags": {},
-      "order": 10,
+      "order": 11,
       "mode": 0,
       "inputs": [
         {
@@ -379,7 +379,7 @@
           "widget": {
             "name": "prompt"
           },
-          "link": 83
+          "link": 88
         }
       ],
       "outputs": [
@@ -633,8 +633,8 @@
       "id": 72,
       "type": "ArkSD_LLM",
       "pos": [
-        -626.334809839878,
-        4490.050881438905
+        -825.771412362149,
+        4396.455620416789
       ],
       "size": [
         436.7816776273113,
@@ -672,7 +672,7 @@
           "name": "text",
           "type": "STRING",
           "links": [
-            83
+            87
           ]
         }
       ],
@@ -722,8 +722,8 @@
       "id": 73,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        -1119.8231995225212,
-        4481.707669395017
+        -1319.2598020447915,
+        4388.112408372901
       ],
       "size": [
         400,
@@ -761,8 +761,8 @@
       "id": 74,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        -1126.15204481962,
-        4739.394420677526
+        -1325.5886473418902,
+        4645.79915965541
       ],
       "size": [
         410.6875743246028,
@@ -808,7 +808,7 @@
         303.1119196093996
       ],
       "flags": {},
-      "order": 13,
+      "order": 14,
       "mode": 0,
       "inputs": [
         {
@@ -829,10 +829,82 @@
         "cnr_id": "comfy-core",
         "ver": "0.39.2",
         "Node name for S&R": "PreviewImage"
-      }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    },
+    {
+      "id": 76,
+      "type": "PreviewAny",
+      "pos": [
+        -343.97486754419657,
+        4420.832701635719
+      ],
+      "size": [
+        495.15940611800283,
+        693.1934007049167
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 87
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            88
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.40.0",
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
     }
   ],
   "links": [
+    [
+      80,
+      67,
+      1,
+      64,
+      0,
+      "INT"
+    ],
+    [
+      81,
+      67,
+      2,
+      65,
+      0,
+      "STRING"
+    ],
+    [
+      86,
+      67,
+      3,
+      75,
+      0,
+      "IMAGE"
+    ],
+    [
+      79,
+      67,
+      0,
+      62,
+      0,
+      "VIDEO"
+    ],
     [
       61,
       66,
@@ -863,30 +935,6 @@
       0,
       66,
       2,
-      "STRING"
-    ],
-    [
-      79,
-      67,
-      0,
-      62,
-      0,
-      "VIDEO"
-    ],
-    [
-      80,
-      67,
-      1,
-      64,
-      0,
-      "INT"
-    ],
-    [
-      81,
-      67,
-      2,
-      65,
-      0,
       "STRING"
     ],
     [
@@ -930,14 +978,6 @@
       "AUDIO"
     ],
     [
-      83,
-      72,
-      0,
-      67,
-      8,
-      "STRING"
-    ],
-    [
       84,
       73,
       0,
@@ -954,12 +994,20 @@
       "STRING"
     ],
     [
-      86,
-      67,
-      3,
-      75,
+      87,
+      72,
       0,
-      "IMAGE"
+      76,
+      0,
+      "STRING"
+    ],
+    [
+      88,
+      76,
+      0,
+      67,
+      8,
+      "STRING"
     ]
   ],
   "groups": [
@@ -979,10 +1027,10 @@
       "id": 2,
       "title": "LLM for generate video prompt",
       "bounding": [
-        -1171.4283476770468,
-        4409.879995921339,
-        1035.9950287339796,
-        868.8451480034573
+        -1370.864950199317,
+        4316.284734899224,
+        1553.8303643503853,
+        848.7264899742622
       ],
       "color": "#3f789e",
       "flags": {}
@@ -1015,13 +1063,13 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.4732332977566213,
+      "scale": 0.5205566275322865,
       "offset": [
-        1391.4216036966443,
-        -3213.538031292949
+        1377.6682325586196,
+        -3209.39859303728
       ]
     },
-    "frontendVersion": "1.55.16",
+    "frontendVersion": "1.55.17",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,
