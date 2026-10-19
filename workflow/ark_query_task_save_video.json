@@ -1,0 +1,489 @@
+{
+  "id": "0a83b832-28d4-4fd0-a76a-5ed7c01ef103",
+  "revision": 0,
+  "last_node_id": 8,
+  "last_link_id": 8,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "ArkSD_QueryTask",
+      "pos": [
+        656.1068806943892,
+        3958.5198086241617
+      ],
+      "size": [
+        346.2057754900893,
+        310.6591445259746
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": [
+            5
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            6
+          ]
+        },
+        {
+          "name": "status",
+          "type": "STRING",
+          "links": [
+            8
+          ]
+        },
+        {
+          "name": "task_id",
+          "type": "STRING",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "gornear/comfyui-arksd",
+        "ver": "8eda17d96297e588d154c4aa459ad68a9d062adf",
+        "Node name for S&R": "ArkSD_QueryTask"
+      },
+      "widgets_values": [
+        "Ark-Main",
+        "",
+        1800,
+        10
+      ],
+      "widgets_values_named": {
+        "api_key_name": "Ark-Main",
+        "task_id": "",
+        "timeout": 1800,
+        "poll_interval": 10
+      }
+    },
+    {
+      "id": 2,
+      "type": "ArkSD_TaskList",
+      "pos": [
+        -96.90200572430052,
+        3855.3794325086037
+      ],
+      "size": [
+        717.6120306477255,
+        566.4117126250794
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "aux_id": "comfyui-arksd.git",
+        "ver": "5fb5843210fa1dfb18a833cb0b211950ab573ce9",
+        "Node name for S&R": "ArkSD_TaskList"
+      },
+      "widgets_values": [
+        "Ark-Main",
+        ""
+      ],
+      "widgets_values_named": {
+        "api_key_name": "Ark-Main",
+        "arksd_tasklist": ""
+      }
+    },
+    {
+      "id": 3,
+      "type": "PrimitiveString",
+      "pos": [
+        1437.2701529263904,
+        3822.1570289263313
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.39.2",
+        "Node name for S&R": "PrimitiveString"
+      },
+      "widgets_values": [
+        "video/arksd"
+      ],
+      "widgets_values_named": {
+        "value": "video/arksd"
+      }
+    },
+    {
+      "id": 4,
+      "type": "easy convertAnything",
+      "pos": [
+        1436.329948057745,
+        3946.7456760008035
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "label": "string",
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "1.3.6",
+        "Node name for S&R": "easy convertAnything"
+      },
+      "widgets_values": [
+        "string"
+      ],
+      "widgets_values_named": {
+        "output_type": "string"
+      }
+    },
+    {
+      "id": 5,
+      "type": "ArkSD_Texts",
+      "pos": [
+        1773.1528254214584,
+        3906.3611633591295
+      ],
+      "size": [
+        270,
+        138
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "texts.text_1",
+          "type": "STRING",
+          "link": 1
+        },
+        {
+          "name": "texts.text_2",
+          "shape": 7,
+          "type": "STRING",
+          "link": 2
+        },
+        {
+          "name": "texts.text_3",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "texts.text_4",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "delimiter",
+          "type": "STRING",
+          "widget": {
+            "name": "delimiter"
+          },
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyui-arksd.git",
+        "ver": "5fb5843210fa1dfb18a833cb0b211950ab573ce9",
+        "Node name for S&R": "ArkSD_Texts"
+      },
+      "widgets_values": [
+        "-"
+      ],
+      "widgets_values_named": {
+        "delimiter": "-"
+      }
+    },
+    {
+      "id": 6,
+      "type": "PrimitiveString",
+      "pos": [
+        1440.1948322541086,
+        4062.851329495909
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.39.2",
+        "Node name for S&R": "PrimitiveString"
+      },
+      "widgets_values": [
+        "cgt-20261018201326-844w5"
+      ],
+      "widgets_values_named": {
+        "value": "cgt-20261018201326-844w5"
+      }
+    },
+    {
+      "id": 7,
+      "type": "SaveVideo",
+      "pos": [
+        2102.5989350697973,
+        3816.49517129552
+      ],
+      "size": [
+        319.7455013786889,
+        680.6975702868185
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "link": 5
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.39.2",
+        "Node name for S&R": "SaveVideo"
+      },
+      "widgets_values": [
+        "video/ComfyUI",
+        "mp4",
+        "h264",
+        "auto",
+        "auto"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "video/ComfyUI",
+        "format": "mp4",
+        "format.codec": "h264",
+        "format.codec.encoding": "auto",
+        "codec": "auto"
+      }
+    },
+    {
+      "id": 8,
+      "type": "PrimitiveString",
+      "pos": [
+        1061.7202614866133,
+        3851.1954742951516
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Status",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.40.0",
+        "Node name for S&R": "PrimitiveString"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "widgets_values_named": {
+        "value": ""
+      }
+    }
+  ],
+  "links": [
+    [
+      6,
+      1,
+      1,
+      4,
+      0,
+      "INT"
+    ],
+    [
+      7,
+      1,
+      3,
+      6,
+      0,
+      "STRING"
+    ],
+    [
+      8,
+      1,
+      2,
+      8,
+      0,
+      "STRING"
+    ],
+    [
+      1,
+      3,
+      0,
+      5,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      4,
+      0,
+      5,
+      1,
+      "STRING"
+    ],
+    [
+      3,
+      6,
+      0,
+      5,
+      4,
+      "STRING"
+    ],
+    [
+      5,
+      1,
+      0,
+      7,
+      0,
+      "VIDEO"
+    ],
+    [
+      4,
+      5,
+      0,
+      7,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Output",
+      "bounding": [
+        1388.7013383764388,
+        3696.205848958209,
+        1096.9597671686663,
+        866.9977810718874
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5205566275322845,
+      "offset": [
+        257.5372945618677,
+        -2993.325480531394
+      ]
+    },
+    "frontendVersion": "1.55.17",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
