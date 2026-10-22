@@ -86,6 +86,7 @@ value. Disconnect it, or turn `return_last_frame` on.
 | **ArkSD Seedance 2.0 Mini** | Lowest cost, 480p/720p |
 | **ArkSD Draft to Video** | Turn a draft task id into the 1080p final |
 | **ArkSD Query Task** | Fetch one task by id and wait for its video; outputs the video, seed, status, and the task id |
+| **ArkSD Last Frame** | Read the last frame of a video without decoding all of it |
 | **ArkSD Task List** | Browse, auto-refresh, and cancel tasks (UI only) |
 | **ArkSD LLM** | Call Ark's chat completions endpoint; returns text, up to 5 images |
 | **ArkSD Texts** | Concatenate up to 10 text inputs into one string |
@@ -254,6 +255,16 @@ ratio, seed, and audio setting automatically; it only lets you re-specify
 ArkSD Seedance 2.5 (non_blocking=true) ──task_id──> (save it)
 ArkSD Query Task (task_id=...) ──VIDEO──> SaveVideo
 ```
+
+### Chaining clips with ArkSD Last Frame
+
+```
+LoadVideo ──VIDEO──> ArkSD Last Frame ──IMAGE──> ArkSD Seedance 2.5.reference_image_0
+```
+
+The node emits the final frame as a one-image batch, so one clip's ending can
+start the next one. It seeks near the end instead of decoding the whole file,
+which matters because a full decode of a long clip costs gigabytes of RAM.
 
 ### Putting the seed in the filename
 

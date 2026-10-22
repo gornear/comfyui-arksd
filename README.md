@@ -82,6 +82,7 @@ pip install -r comfyui-arksd/requirements.txt
 | **ArkSD Seedance 2.0 Mini** | 成本最低，仅 480p/720p |
 | **ArkSD Draft to Video** | 把样片任务 ID 转成 1080p 成片 |
 | **ArkSD Query Task** | 按任务 ID 查询并等待出片；输出视频、种子、状态和该任务 ID |
+| **ArkSD Last Frame** | 读取视频的最后一帧，无需全量解码 |
 | **ArkSD Task List** | 浏览、自动刷新、取消任务（纯 UI） |
 | **ArkSD LLM** | 调用方舟对话接口，返回文本，最多 5 张图 |
 | **ArkSD Texts** | 把最多 10 段文本拼接成一段 |
@@ -236,6 +237,15 @@ ArkSD Seedance 2.5（draft=true, resolution=480p）
 ArkSD Seedance 2.5（non_blocking=true）──task_id──>（保存起来）
 ArkSD Query Task（task_id=...）──VIDEO──> SaveVideo
 ```
+
+### 用 ArkSD Last Frame 衔接片段
+
+```
+LoadVideo ──VIDEO──> ArkSD Last Frame ──IMAGE──> ArkSD Seedance 2.5.reference_image_0
+```
+
+该节点把最后一帧作为单张图片批次输出，因此上一段的结尾可以直接作为下一段的开头。
+它只 seek 到接近末尾再解码，不做全量解码 —— 长视频全量解码会消耗数 GB 内存。
 
 ### 把种子写进文件名
 
