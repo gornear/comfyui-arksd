@@ -77,6 +77,14 @@ except ImportError as exc:  # pragma: no cover - only hit outside ComfyUI
     LOGGER.debug("[ArkSD] task nodes not registered: %s", exc)
 
 try:
+    from .nodes.nodes_last_frame import ArkSDLastFrame
+
+    NODE_CLASS_MAPPINGS["ArkSD_LastFrame"] = ArkSDLastFrame
+    NODE_DISPLAY_NAME_MAPPINGS["ArkSD_LastFrame"] = "ArkSD Last Frame"
+except ImportError as exc:  # pragma: no cover - only hit outside ComfyUI
+    LOGGER.debug("[ArkSD] last frame node not registered: %s", exc)
+
+try:
     from .nodes.nodes_llm import ArkSDLLM, ArkSDTexts
 
     NODE_CLASS_MAPPINGS.update(
