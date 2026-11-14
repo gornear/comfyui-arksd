@@ -9,6 +9,7 @@ Ark **assets** (`asset://<id>`) as reference images, videos, and audio.
 
 ## Features
 
+- **ArkSD Save Video**: pick the audio codec when saving — **flac (default, 16-bit lossless)**, **mp3**, or **aac** — in an mp4 or mkv container. The official Save Video node always writes aac, so a lossless track cannot survive it.
 - Seedance **2.5**, **2.5 Flash**, **2.0**, **2.0 Fast**, and **2.0 Mini** as separate nodes
 - Reference input by **asset id**, public URL, or a local ComfyUI image
 - **Draft mode** for Seedance 2.5: a cheap 480p preview, then a 1080p final
@@ -88,6 +89,7 @@ value. Disconnect it, or turn `return_last_frame` on.
 | **ArkSD Draft to Video** | Turn a draft task id into the 1080p final |
 | **ArkSD Query Task** | Fetch one task by id and wait for its video; outputs the video, seed, status, and the task id |
 | **ArkSD Last Frame** | Read the last frame of a video without decoding all of it |
+| **ArkSD Save Video** | Save a video with a selectable flac / mp3 / aac audio codec |
 | **ArkSD Task List** | Browse, auto-refresh, and cancel tasks (UI only) |
 | **ArkSD LLM** | Call Ark's chat completions endpoint; returns text, up to 5 images |
 | **ArkSD Texts** | Concatenate up to 10 text inputs into one string |
@@ -267,6 +269,29 @@ ratio, seed, and audio setting automatically; it only lets you re-specify
 ```
 ArkSD Seedance 2.5 (non_blocking=true) ──task_id──> (save it)
 ArkSD Query Task (task_id=...) ──VIDEO──> SaveVideo
+```
+
+### Saving a video and its audio codec
+
+The official `SaveVideo` hardcodes the audio codec, so even an mkv comes out with aac. **ArkSD Save Video** lets you choose:
+
+| Input | Default | Options |
+|---|---|---|
+| `container` | mp4 | mp4 / mkv |
+| `video_codec` | h264 | h264 / av1 |
+| `preset` | medium | fastest / fast / medium / slow / slowest |
+| `crf` | 23 | 0–51 |
+| `audio_codec` | **flac** | flac / mp3 / aac |
+| `quality` | V0 | V0 / 128k / 320k (only shown for mp3) |
+
+- **flac is 16-bit** and lossless; both mp4 and mkv carry it
+- **mp3** `V0` is variable bitrate at roughly 245 kbps; `128k` and `320k` are constant bitrate
+- **crf** is one number shared by hardware and software encoding; all five `preset` names exist on both CPU and NVIDIA encoders
+- NVIDIA hardware encoding is used automatically when available, with a CPU fallback, so there is nothing to switch
+- The `video` output passes the input through unchanged, like the official node
+
+```
+ArkSD Seedance 2.5 ──VIDEO──> ArkSD Save Video
 ```
 
 ### Chaining clips with ArkSD Last Frame

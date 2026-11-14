@@ -9,6 +9,7 @@
 
 ## 功能
 
+- **ArkSD Save Video**：保存视频时可自选音频编码 **flac（默认，16-bit 无损）/ mp3 / aac**，容器可选 mp4 或 mkv —— 官方 SaveVideo 写死 aac，无损音轨过不去
 - **Seedance 2.5**、**2.5 Flash**、**2.0**、**2.0 Fast**、**2.0 Mini** 各自独立的节点
 - 参考素材支持**素材 ID**、公网 URL，或 ComfyUI 本地图片
 - Seedance 2.5 的**样片模式**：先出一段便宜的 480p 预览，再生成 1080p 成片
@@ -84,6 +85,7 @@ pip install -r comfyui-arksd/requirements.txt
 | **ArkSD Draft to Video** | 把样片任务 ID 转成 1080p 成片 |
 | **ArkSD Query Task** | 按任务 ID 查询并等待出片；输出视频、种子、状态和该任务 ID |
 | **ArkSD Last Frame** | 读取视频的最后一帧，无需全量解码 |
+| **ArkSD Save Video** | 保存视频，音频编码可选 flac / mp3 / aac |
 | **ArkSD Task List** | 浏览、自动刷新、取消任务（纯 UI） |
 | **ArkSD LLM** | 调用方舟对话接口，返回文本，最多 5 张图 |
 | **ArkSD Texts** | 把最多 10 段文本拼接成一段 |
@@ -257,6 +259,29 @@ LoadVideo ──VIDEO──> ArkSD Last Frame ──IMAGE──> ArkSD Seedance 
 
 该节点把最后一帧作为单张图片批次输出，因此上一段的结尾可以直接作为下一段的开头。
 它只 seek 到接近末尾再解码，不做全量解码 —— 长视频全量解码会消耗数 GB 内存。
+
+### 保存视频与音频编码
+
+官方 `SaveVideo` 的音频编码是写死的，选 mkv 也只出 aac。**ArkSD Save Video** 让你自己选：
+
+| 输入 | 默认 | 选项 |
+|---|---|---|
+| `container` | mp4 | mp4 / mkv |
+| `video_codec` | h264 | h264 / av1 |
+| `preset` | medium | fastest / fast / medium / slow / slowest |
+| `crf` | 23 | 0–51 |
+| `audio_codec` | **flac** | flac / mp3 / aac |
+| `quality` | V0 | V0 / 128k / 320k（仅选 mp3 时出现） |
+
+- **flac 固定 16-bit**，无损；mp4 和 mkv 都能装 flac
+- **mp3** 的 `V0` 是可变码率（平均约 245 kbps），`128k` / `320k` 是固定码率
+- **crf** 软编硬编共用同一个数字；`preset` 的五个名字在 CPU 和 NVIDIA 上都有效
+- 有 NVIDIA 显卡时自动用硬件编码，没有则回退到 CPU，无需手动切换
+- 输出 `video` 原样透传，和官方节点一致
+
+```
+ArkSD Seedance 2.5 ──VIDEO──> ArkSD Save Video
+```
 
 ### 把种子写进文件名
 
