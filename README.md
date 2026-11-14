@@ -7,9 +7,14 @@
 通过异步 HTTP 直接调用方舟视频生成 API，支持把方舟**素材**（`asset://<id>`）
 作为参考图、参考视频和参考音频。
 
+> **为什么有 ArkSD Save Video**：在 Linux 下用 ComfyUI 生成的视频，音轨是 aac。
+> **DaVinci Resolve Studio 不接受这种 aac**，所以拖进时间线没有声音。
+> 同一个视频，只要音频换成 mp3 或 flac、容器是 mp4 或 mkv，Resolve 就能正常读。
+> 官方的 SaveVideo 把音频编码写死了，只能出 aac；本节点补上这个选择。
+
 ## 功能
 
-- **ArkSD Save Video**：保存视频时可自选音频编码 **flac（默认，16-bit 无损）/ mp3 / aac**，容器可选 mp4 或 mkv —— 官方 SaveVideo 写死 aac，无损音轨过不去
+- **ArkSD Save Video**：保存时自选音频编码 **flac（默认，16-bit 无损）/ mp3 / aac**，容器 mp4 或 mkv —— 专治 Resolve 不认 aac 的问题
 - **Seedance 2.5**、**2.5 Flash**、**2.0**、**2.0 Fast**、**2.0 Mini** 各自独立的节点
 - 参考素材支持**素材 ID**、公网 URL，或 ComfyUI 本地图片
 - Seedance 2.5 的**样片模式**：先出一段便宜的 480p 预览，再生成 1080p 成片
@@ -262,7 +267,10 @@ LoadVideo ──VIDEO──> ArkSD Last Frame ──IMAGE──> ArkSD Seedance 
 
 ### 保存视频与音频编码
 
-官方 `SaveVideo` 的音频编码是写死的，选 mkv 也只出 aac。**ArkSD Save Video** 让你自己选：
+**背景**：在 Linux 下用 ComfyUI 出片，音轨默认是 aac。**DaVinci Resolve Studio 不接受
+这种 aac** —— 导入后没有声音。换成 mp3 或 flac，容器用 mp4 或 mkv，Resolve 就能读。
+官方 `SaveVideo` 的音频编码写死在 `video_types.py` 里（mp4 出 aac，webm 出 opus），
+选 mkv 也只是换容器，音轨依旧是 aac。**ArkSD Save Video** 把音频编码的选择权交给你：
 
 | 输入 | 默认 | 选项 |
 |---|---|---|
@@ -278,6 +286,9 @@ LoadVideo ──VIDEO──> ArkSD Last Frame ──IMAGE──> ArkSD Seedance 
 - **crf** 软编硬编共用同一个数字；`preset` 的五个名字在 CPU 和 NVIDIA 上都有效
 - 有 NVIDIA 显卡时自动用硬件编码，没有则回退到 CPU，无需手动切换
 - 输出 `video` 原样透传，和官方节点一致
+
+**给 DaVinci Resolve 用户**：`flac` 或 `mp3` + `mp4` 或 `mkv` 都能直接导入。
+要无损存档选 `flac` + `mkv`；要兼容性最广选 `mp3 192k` + `mp4`。
 
 ```
 ArkSD Seedance 2.5 ──VIDEO──> ArkSD Save Video
