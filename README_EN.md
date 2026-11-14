@@ -9,7 +9,7 @@ Ark **assets** (`asset://<id>`) as reference images, videos, and audio.
 
 ## Features
 
-- Seedance **2.5**, **2.0**, **2.0 Fast**, and **2.0 Mini** as separate nodes
+- Seedance **2.5**, **2.5 Flash**, **2.0**, **2.0 Fast**, and **2.0 Mini** as separate nodes
 - Reference input by **asset id**, public URL, or a local ComfyUI image
 - **Draft mode** for Seedance 2.5: a cheap 480p preview, then a 1080p final
 - Blocking (wait for the video) and non-blocking (return the task id) modes
@@ -81,6 +81,7 @@ value. Disconnect it, or turn `return_last_frame` on.
 | **ArkSD Asset** | Pick an asset from your Ark library; outputs `asset://<id>` |
 | **ArkSD Asset (Manual ID)** | Type an asset id directly; for authorized assets the list cannot show |
 | **ArkSD Seedance 2.5** | Seedance 2.5 generation, including draft mode |
+| **ArkSD Seedance 2.5 Flash** | Quality close to 2.5, roughly twice the speed and cheaper, 480p/720p only |
 | **ArkSD Seedance 2.0** | Seedance 2.0 generation (supports 4k) |
 | **ArkSD Seedance 2.0 Fast** | Cheaper and faster, 480p/720p |
 | **ArkSD Seedance 2.0 Mini** | Lowest cost, 480p/720p |
@@ -90,6 +91,17 @@ value. Disconnect it, or turn `return_last_frame` on.
 | **ArkSD Task List** | Browse, auto-refresh, and cancel tasks (UI only) |
 | **ArkSD LLM** | Call Ark's chat completions endpoint; returns text, up to 5 images |
 | **ArkSD Texts** | Concatenate up to 10 text inputs into one string |
+
+### Seedance 2.5 Flash
+
+`doubao-seedance-2-5-flash` is the value tier of Seedance 2.5: quality close to
+2.5, roughly twice the generation speed, and a lower price, aimed at batch
+production. It supports **480p / 720p** only, with no 1080p or 4k. Reference
+limits, duration limit, and draft mode match Seedance 2.5.
+
+The model opens for API calls at **2026-11-15 14:00 Beijing time (UTC+8)**.
+Before that, submitting a task returns `ModelNotOpen` or `InvalidParameter`;
+that is not a node bug.
 
 ## Text generation
 
@@ -137,7 +149,7 @@ It is inlined as base64 only when it passes both gates:
 | Gate | Video | Audio |
 |---|---|---|
 | Size | 30 MB | 30 MB |
-| Duration | Seedance 2.0 / Fast / Mini: 15 s<br>Seedance 2.5: 30 s | Seedance 2.0 / Fast / Mini: 15 s<br>Seedance 2.5: 30 s |
+| Duration | Seedance 2.0 / Fast / Mini: 15 s<br>Seedance 2.5 / 2.5 Flash: 30 s | Seedance 2.0 / Fast / Mini: 15 s<br>Seedance 2.5 / 2.5 Flash: 30 s |
 | Encoding | base64 of the original file | 16-bit PCM WAV, then base64 |
 
 Anything over a limit is refused before the request is sent, with the real
@@ -158,6 +170,7 @@ Reference limits per model:
 | Model | Images | Videos | Audio |
 |---|---|---|---|
 | Seedance 2.5 | 30 | 10 | 10 |
+| Seedance 2.5 Flash | 30 | 10 | 10 |
 | Seedance 2.0 / Fast / Mini | 9 | 3 | 3 |
 
 ### Local images are adjusted automatically

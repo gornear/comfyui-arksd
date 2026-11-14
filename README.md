@@ -9,7 +9,7 @@
 
 ## 功能
 
-- **Seedance 2.5**、**2.0**、**2.0 Fast**、**2.0 Mini** 各自独立的节点
+- **Seedance 2.5**、**2.5 Flash**、**2.0**、**2.0 Fast**、**2.0 Mini** 各自独立的节点
 - 参考素材支持**素材 ID**、公网 URL，或 ComfyUI 本地图片
 - Seedance 2.5 的**样片模式**：先出一段便宜的 480p 预览，再生成 1080p 成片
 - 阻塞（等待出片）与非阻塞（立即返回任务 ID）两种模式
@@ -77,6 +77,7 @@ pip install -r comfyui-arksd/requirements.txt
 | **ArkSD Asset** | 从方舟素材库选择素材，输出 `asset://<id>` |
 | **ArkSD Asset (Manual ID)** | 直接手填素材 ID，用于列表看不到的授权素材 |
 | **ArkSD Seedance 2.5** | Seedance 2.5 生成，含样片模式 |
+| **ArkSD Seedance 2.5 Flash** | 画质接近 2.5，速度约两倍、价格更低，仅 480p/720p |
 | **ArkSD Seedance 2.0** | Seedance 2.0 生成（支持 4k） |
 | **ArkSD Seedance 2.0 Fast** | 更快更便宜，仅 480p/720p |
 | **ArkSD Seedance 2.0 Mini** | 成本最低，仅 480p/720p |
@@ -86,6 +87,15 @@ pip install -r comfyui-arksd/requirements.txt
 | **ArkSD Task List** | 浏览、自动刷新、取消任务（纯 UI） |
 | **ArkSD LLM** | 调用方舟对话接口，返回文本，最多 5 张图 |
 | **ArkSD Texts** | 把最多 10 段文本拼接成一段 |
+
+### Seedance 2.5 Flash
+
+`doubao-seedance-2-5-flash` 是 Seedance 2.5 的性价比版本：画质接近 2.5，生成
+速度约两倍，价格更低，适合批量出片。它只支持 **480p / 720p**，没有 1080p 和
+4k；参考素材上限、时长上限和样片模式与 Seedance 2.5 相同。
+
+该模型于**北京时间 2026-11-15 14:00** 开放 API 调用。在此之前提交任务会返回
+`ModelNotOpen` 或 `InvalidParameter`，这不是节点的问题。
 
 ## 文本生成
 
@@ -130,7 +140,7 @@ ArkSD LLM ──text──> ArkSD Texts ──text──> ArkSD Seedance 2.5.pro
 | 限制 | 视频 | 音频 |
 |---|---|---|
 | 体积 | 30 MB | 30 MB |
-| 时长 | Seedance 2.0 / Fast / Mini：15 秒<br>Seedance 2.5：30 秒 | Seedance 2.0 / Fast / Mini：15 秒<br>Seedance 2.5：30 秒 |
+| 时长 | Seedance 2.0 / Fast / Mini：15 秒<br>Seedance 2.5 / 2.5 Flash：30 秒 | Seedance 2.0 / Fast / Mini：15 秒<br>Seedance 2.5 / 2.5 Flash：30 秒 |
 | 编码 | 原文件 base64 | 16-bit PCM WAV，再 base64 |
 
 超出任一限制都会在请求发出前被拒绝，错误信息里会写明真实限额。要用更长或更大
@@ -148,6 +158,7 @@ WAV 不压缩，所以即使时长没超限，特别长的片段也可能先撞�
 | 模型 | 图片 | 视频 | 音频 |
 |---|---|---|---|
 | Seedance 2.5 | 30 | 10 | 10 |
+| Seedance 2.5 Flash | 30 | 10 | 10 |
 | Seedance 2.0 / Fast / Mini | 9 | 3 | 3 |
 
 ### 本地图片会自动调整
