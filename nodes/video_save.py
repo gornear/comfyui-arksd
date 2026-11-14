@@ -8,11 +8,16 @@ output nodes. This writes the container itself with PyAV.
 import json
 import logging
 import math
+import os
 from fractions import Fraction
 
 import av
+import folder_paths
 
-from .video_utils import AV1_ENCODERS, H264_ENCODERS, pick_video_encoder, video_encoder_options
+from comfy.cli_args import args
+from comfy_api.latest import io, ui
+
+from .video_utils import AV1_ENCODERS, H264_ENCODERS, PRESETS, pick_video_encoder, video_encoder_options
 
 LOGGER = logging.getLogger("arksd")
 
@@ -108,3 +113,117 @@ def _write_audio(out, stream, audio, frame_rate, frame_count):
         out.mux(packet)
     for packet in stream.encode(None):
         out.mux(packet)
+
+
+class ArkSD_SaveVideo(io.ComfyNode):
+    """Save a video, choosing the audio codec instead of always getting aac."""
+
+    @classmethod
+    def define_schema(cls):
+        return io.Schema(
+            node_id="ArkSD_SaveVideo",
+            display_name="ArkSD Save Video",
+            category="api node/ArkSD",
+            description=(
+                "Save a video to the output directory with a selectable audio codec. "
+                "The official Save Video node always writes aac, so a lossless track cannot survive it."
+            ),
+            inputs=[
+                io.Video.Input("video", tooltip="The video to save."),
+                io.String.Input(
+                    "filename_prefix",
+                    default="video/ArkSD",
+                    tooltip="The prefix for the file to save. May include formatting tokens such as %date:yyyy-MM-dd%.",
+                ),
+                io.Combo.Input(
+                    "container",
+                    options=["mp4", "mkv"],
+                    default="mp4",
+                    tooltip="Both containers carry every audio codec on offer.",
+                ),
+                io.Combo.Input(
+                    "video_codec",
+                    options=["h264", "av1"],
+                    default="h264",
+                    tooltip="h264 is the safe choice; av1 is smaller at the same quality but slower to encode.",
+                ),
+                io.Combo.Input(
+                    "preset",
+                    options=PRESETS,
+                    default="medium",
+                    tooltip="Faster presets encode quickly and produce larger files.",
+                ),
+                io.Int.Input(
+                    "crf",
+                    default=23,
+                    min=0,
+                    max=51,
+                    tooltip="Lower keeps more detail and makes a larger file. Used for both hardware and software encoding.",
+                ),
+                io.DynamicCombo.Input(
+                    "audio_codec",
+                    options=[
+                        io.DynamicCombo.Option("flac", []),
+                        io.DynamicCombo.Option(
+                            "mp3",
+                            [
+                                io.Combo.Input(
+                                    "quality",
+                                    options=["V0", "128k", "320k"],
+                                    default="V0",
+                                    tooltip="V0 is variable bitrate at about 245 kbps; the others are constant bitrate.",
+                                ),
+                            ],
+                        ),
+                        io.DynamicCombo.Option("aac", []),
+                    ],
+                    tooltip="flac is lossless, mp3 and aac are lossy. flac is saved at 16-bit.",
+                ),
+            ],
+            hidden=[io.Hidden.prompt, io.Hidden.extra_pnginfo],
+            is_output_node=True,
+            outputs=[io.Video.Output("video", tooltip="The input video, unchanged.")],
+        )
+
+    @staticmethod
+    def resolve_save_args(audio_codec) -> tuple[str, str]:
+        """Return the chosen codec and quality from the dynamic combo value."""
+        if isinstance(audio_codec, dict):
+            return audio_codec.get("audio_codec", "flac"), audio_codec.get("quality", "V0")
+        return audio_codec, "V0"
+
+    @classmethod
+    def execute(cls, video, filename_prefix, container, video_codec, preset, crf, audio_codec) -> io.NodeOutput:
+        codec, quality = cls.resolve_save_args(audio_codec)
+        width, height = video.get_dimensions()
+        full_output_folder, filename, counter, subfolder, _ = folder_paths.get_save_image_path(
+            filename_prefix,
+            folder_paths.get_output_directory(),
+            width,
+            height,
+        )
+
+        metadata = None
+        if not args.disable_metadata:
+            hidden = cls.hidden
+            collected = {}
+            if hidden is not None:
+                if hidden.extra_pnginfo is not None:
+                    collected.update(hidden.extra_pnginfo)
+                if hidden.prompt is not None:
+                    collected["prompt"] = hidden.prompt
+            metadata = collected or None
+
+        file = f"{filename}_{counter:05}_.{container}"
+        write_video(
+            os.path.join(full_output_folder, file),
+            video.get_components(),
+            container=container,
+            video_codec=video_codec,
+            preset=preset,
+            crf=crf,
+            audio_codec=codec,
+            audio_quality=quality,
+            metadata=metadata,
+        )
+        return io.NodeOutput(video, ui=ui.PreviewVideo([ui.SavedResult(file, subfolder, io.FolderType.output)]))
