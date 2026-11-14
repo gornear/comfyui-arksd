@@ -1,5 +1,8 @@
 # comfyui-arksd
 
+> **Note: Seedance 2.5 Flash is not callable until 2026-11-15 14:00 Beijing time.**
+> Tasks submitted before then return `ModelNotOpen` or `InvalidParameter`; that is not a node bug.
+
 English | [中文说明](README.md)
 
 ComfyUI nodes for **Volcengine Ark (火山方舟) Seedance 2.x** video generation.

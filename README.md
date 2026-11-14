@@ -1,5 +1,8 @@
 # comfyui-arksd
 
+> **注意：Seedance 2.5 Flash 需等到北京时间 2026-11-15 14:00 之后才开放 API 调用。**
+> 在此之前提交任务会返回 `ModelNotOpen` 或 `InvalidParameter`，这不是节点的问题。
+
 [English](README_EN.md) | 中文说明
 
 用于 **火山方舟（Volcengine Ark）Seedance 2.x** 视频生成的 ComfyUI 节点。
