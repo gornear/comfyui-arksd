@@ -92,6 +92,7 @@ def _input_defaults(node_cls):
 def test_all_generation_nodes_default_duration_to_5():
     for node_cls in (
         nodes_video.ArkSDSeedance25,
+        nodes_video.ArkSDSeedance25Flash,
         nodes_video.ArkSDSeedance20,
         nodes_video.ArkSDSeedance20Fast,
         nodes_video.ArkSDSeedance20Mini,
@@ -122,3 +123,26 @@ def test_seedance_25_flash_spec():
     assert spec.supports_output_format is True
     assert spec.supports_draft is True
     assert spec.supports_task_type is False
+
+
+def test_seedance_25_flash_node_schema():
+    schema = nodes_video.ArkSDSeedance25Flash.define_schema()
+    by_id = {i.id: i for i in schema.inputs}
+    assert by_id["resolution"].options == ["480p", "720p"]
+    assert by_id["reference_images"].template.max == 30
+    assert by_id["reference_videos"].template.max == 10
+    assert by_id["reference_audios"].template.max == 10
+    assert by_id["draft"].default is True
+    assert by_id["output_format"].default == "mp4"
+    assert "omni_reference_task_type" not in by_id
+
+
+def test_seedance_25_flash_draft_forces_480p():
+    body = nodes_video.build_body(MODELS["seedance_2_5_flash"], {
+        "prompt": "a cat", "resolution": "720p", "ratio": "adaptive",
+        "duration": 5, "seed": -1, "watermark": False, "generate_audio": True,
+        "images": [], "videos": [], "audios": [], "draft": True,
+    })
+    assert body["model"] == "doubao-seedance-2-5-flash"
+    assert body["draft"] is True
+    assert body["resolution"] == "480p"

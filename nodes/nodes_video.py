@@ -542,6 +542,44 @@ class ArkSDSeedance25(io.ComfyNode):
         return await _run(MODELS["seedance_2_5"], _collect_kwargs(kwargs))
 
 
+class ArkSDSeedance25Flash(io.ComfyNode):
+    @classmethod
+    def define_schema(cls):
+        spec = MODELS["seedance_2_5_flash"]
+        return io.Schema(
+            node_id="ArkSD_Seedance25Flash",
+            display_name="ArkSD Seedance 2.5 Flash",
+            category="api node/ArkSD",
+            description=(
+                "Doubao Seedance 2.5 Flash video generation. Quality close to 2.5 "
+                "at roughly twice the speed and a lower price, 480p/720p only. "
+                "Up to 30 images, 10 videos and 10 audio references, plus draft mode."
+            ),
+            inputs=[
+                *_common_inputs(spec),
+                io.Combo.Input(
+                    "output_format",
+                    options=OUTPUT_FORMATS,
+                    default="mp4",
+                    tooltip="mp4 for compatibility, mov for high color fidelity post work.",
+                ),
+                io.Boolean.Input(
+                    "draft",
+                    default=True,
+                    tooltip=(
+                        "Draft mode: generate a 480p preview first. Feed the task id into "
+                        "ArkSD Draft to Video to produce the 1080p final."
+                    ),
+                ),
+            ],
+            outputs=_outputs(),
+        )
+
+    @classmethod
+    async def execute(cls, **kwargs) -> io.NodeOutput:
+        return await _run(MODELS["seedance_2_5_flash"], _collect_kwargs(kwargs))
+
+
 class ArkSDSeedance20(io.ComfyNode):
     @classmethod
     def define_schema(cls):

@@ -34,11 +34,13 @@ try:
         ArkSDSeedance20Fast,
         ArkSDSeedance20Mini,
         ArkSDSeedance25,
+        ArkSDSeedance25Flash,
     )
 
     NODE_CLASS_MAPPINGS.update(
         {
             "ArkSD_Seedance25": ArkSDSeedance25,
+            "ArkSD_Seedance25Flash": ArkSDSeedance25Flash,
             "ArkSD_Seedance20": ArkSDSeedance20,
             "ArkSD_Seedance20Fast": ArkSDSeedance20Fast,
             "ArkSD_Seedance20Mini": ArkSDSeedance20Mini,
@@ -47,6 +49,7 @@ try:
     NODE_DISPLAY_NAME_MAPPINGS.update(
         {
             "ArkSD_Seedance25": "ArkSD Seedance 2.5",
+            "ArkSD_Seedance25Flash": "ArkSD Seedance 2.5 Flash",
             "ArkSD_Seedance20": "ArkSD Seedance 2.0",
             "ArkSD_Seedance20Fast": "ArkSD Seedance 2.0 Fast",
             "ArkSD_Seedance20Mini": "ArkSD Seedance 2.0 Mini",
