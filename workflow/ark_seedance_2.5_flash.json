@@ -1,0 +1,1058 @@
+{
+  "id": "c06838b9-acec-4928-b1a7-b780d3e6542d",
+  "revision": 0,
+  "last_node_id": 79,
+  "last_link_id": 99,
+  "nodes": [
+    {
+      "id": 31,
+      "type": "ArkSD_TaskList",
+      "pos": [
+        903.6104626335577,
+        4713.550700316791
+      ],
+      "size": [
+        717.6120306477255,
+        566.4117126250794
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "aux_id": "comfyui-arksd.git",
+        "ver": "5fb5843210fa1dfb18a833cb0b211950ab573ce9",
+        "Node name for S&R": "ArkSD_TaskList"
+      },
+      "widgets_values": [
+        "Ark-Main",
+        ""
+      ],
+      "widgets_values_named": {
+        "api_key_name": "Ark-Main",
+        "arksd_tasklist": ""
+      }
+    },
+    {
+      "id": 60,
+      "type": "ArkSD_AssetManual",
+      "pos": [
+        -1358.9534784469008,
+        3613.3086423307623
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "asset",
+          "type": "STRING",
+          "links": [
+            94
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyui-arksd.git",
+        "ver": "5fb5843210fa1dfb18a833cb0b211950ab573ce9",
+        "Node name for S&R": "ArkSD_AssetManual"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "widgets_values_named": {
+        "asset_id": ""
+      }
+    },
+    {
+      "id": 63,
+      "type": "PrimitiveString",
+      "pos": [
+        884.1368369989755,
+        3825.2571168017143
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            57
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.39.2",
+        "Node name for S&R": "PrimitiveString"
+      },
+      "widgets_values": [
+        "video/arksd"
+      ],
+      "widgets_values_named": {
+        "value": "video/arksd"
+      }
+    },
+    {
+      "id": 64,
+      "type": "easy convertAnything",
+      "pos": [
+        883.19663213033,
+        3956.958271913719
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "link": 92
+        }
+      ],
+      "outputs": [
+        {
+          "label": "string",
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            58
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "1.3.6",
+        "Node name for S&R": "easy convertAnything"
+      },
+      "widgets_values": [
+        "string"
+      ],
+      "widgets_values_named": {
+        "output_type": "string"
+      }
+    },
+    {
+      "id": 65,
+      "type": "PrimitiveString",
+      "pos": [
+        887.8248787881165,
+        4096.4336984971305
+      ],
+      "size": [
+        269.23673935469924,
+        57.99999081646412
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": 93
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            74
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.39.2",
+        "Node name for S&R": "PrimitiveString"
+      },
+      "widgets_values": [
+        "cgt-20261018201326-844w5"
+      ],
+      "widgets_values_named": {
+        "value": "cgt-20261018201326-844w5"
+      }
+    },
+    {
+      "id": 66,
+      "type": "ArkSD_Texts",
+      "pos": [
+        1238.5877810208417,
+        3894.1069659391196
+      ],
+      "size": [
+        270,
+        138
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "texts.text_1",
+          "type": "STRING",
+          "link": 57
+        },
+        {
+          "name": "texts.text_2",
+          "shape": 7,
+          "type": "STRING",
+          "link": 58
+        },
+        {
+          "name": "texts.text_3",
+          "shape": 7,
+          "type": "STRING",
+          "link": 74
+        },
+        {
+          "name": "texts.text_4",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            89
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyui-arksd.git",
+        "ver": "5fb5843210fa1dfb18a833cb0b211950ab573ce9",
+        "Node name for S&R": "ArkSD_Texts"
+      },
+      "widgets_values": [
+        "-"
+      ],
+      "widgets_values_named": {
+        "delimiter": "-"
+      }
+    },
+    {
+      "id": 68,
+      "type": "LoadImage",
+      "pos": [
+        -1071.4828139526953,
+        3607.3349494128734
+      ],
+      "size": [
+        282.798828125,
+        314.00000000000045
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            95
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.39.2",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 69,
+      "type": "LoadVideo",
+      "pos": [
+        -310.0036740849492,
+        3619.2355846503306
+      ],
+      "size": [
+        386.798828125,
+        577.176912006579
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VIDEO",
+          "type": "VIDEO",
+          "links": [
+            97
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.39.2",
+        "Node name for S&R": "LoadVideo"
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ],
+      "widgets_values_named": {
+        "file": "",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 70,
+      "type": "LoadAudio",
+      "pos": [
+        -1150.4149747406414,
+        4072.5087180318774
+      ],
+      "size": [
+        282.798828125,
+        136
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            98
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.39.2",
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ],
+      "widgets_values_named": {
+        "audio": "",
+        "upload": ""
+      }
+    },
+    {
+      "id": 71,
+      "type": "ArkSD_Asset",
+      "pos": [
+        -726.6668710510769,
+        3616.0805038241047
+      ],
+      "size": [
+        352.58548722306114,
+        543.8055684142882
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "asset",
+          "type": "STRING",
+          "links": [
+            96
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyui-arksd.git",
+        "ver": "5fb5843210fa1dfb18a833cb0b211950ab573ce9",
+        "Node name for S&R": "ArkSD_Asset"
+      },
+      "widgets_values": [
+        "Ark-AK",
+        "AIGC",
+        "Image",
+        "",
+        false,
+        "default",
+        "",
+        ""
+      ],
+      "widgets_values_named": {
+        "ak_sk_name": "Ark-AK",
+        "group_type": "AIGC",
+        "asset_type": "Image",
+        "asset_id": "",
+        "refresh": false,
+        "project_name": "default",
+        "group_id": "",
+        "arksd_asset_picker": ""
+      }
+    },
+    {
+      "id": 72,
+      "type": "ArkSD_LLM",
+      "pos": [
+        -825.771412362149,
+        4396.455620416789
+      ],
+      "size": [
+        436.7816776273113,
+        735.3518140506458
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images.image_1",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "system_prompt"
+          },
+          "link": 84
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 85
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            87
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyui-arksd.git",
+        "ver": "5fb5843210fa1dfb18a833cb0b211950ab573ce9",
+        "Node name for S&R": "ArkSD_LLM"
+      },
+      "widgets_values": [
+        "Ark-Main",
+        "",
+        "You are a helpful assistant.",
+        "",
+        0,
+        0,
+        0.3,
+        0,
+        0,
+        16384,
+        60,
+        1024,
+        1024,
+        95,
+        ""
+      ],
+      "widgets_values_named": {
+        "api_key_name": "Ark-Main",
+        "model": "",
+        "system_prompt": "You are a helpful assistant.",
+        "prompt": "",
+        "temperature": 0,
+        "top_k": 0,
+        "top_p": 0.3,
+        "presence_penalty": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 16384,
+        "timeout": 60,
+        "image_max_side": 1024,
+        "image_max_kb": 1024,
+        "image_quality": 95,
+        "arksd_model_picker": ""
+      },
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 73,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        -1319.2598020447915,
+        4388.112408372901
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            84
+          ]
+        }
+      ],
+      "title": "System Prompt",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.39.2",
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "widgets_values_named": {
+        "value": ""
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 74,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        -1325.5886473418902,
+        4645.79915965541
+      ],
+      "size": [
+        410.6875743246028,
+        472.53152541293457
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            85
+          ]
+        }
+      ],
+      "title": "User Prompt",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.39.2",
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "widgets_values_named": {
+        "value": ""
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 76,
+      "type": "PreviewAny",
+      "pos": [
+        -343.97486754419657,
+        4420.832701635719
+      ],
+      "size": [
+        495.15940611800283,
+        693.1934007049167
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 87
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            99
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.40.0",
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    },
+    {
+      "id": 77,
+      "type": "ArkSD_SaveVideo",
+      "pos": [
+        1591.66054649807,
+        3846.4433660755985
+      ],
+      "size": [
+        270,
+        178
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "link": 91
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": 89
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyui-arksd.git",
+        "ver": "1145a34cf4101650ac0b4632b7d872e1316aa622",
+        "Node name for S&R": "ArkSD_SaveVideo"
+      },
+      "widgets_values": [
+        "video/ArkSD",
+        "mp4",
+        "h264",
+        "medium",
+        23,
+        "flac"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "video/ArkSD",
+        "container": "mp4",
+        "video_codec": "h264",
+        "preset": "medium",
+        "crf": 23,
+        "audio_codec": "flac"
+      }
+    },
+    {
+      "id": 78,
+      "type": "ArkSD_Seedance25Flash",
+      "pos": [
+        226.41448664103643,
+        4273.470963691481
+      ],
+      "size": [
+        519.0893800591126,
+        811.4734892814017
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "reference_images.reference_image_0",
+          "shape": 7,
+          "type": "IMAGE,STRING",
+          "link": 94
+        },
+        {
+          "name": "reference_images.reference_image_1",
+          "shape": 7,
+          "type": "IMAGE,STRING",
+          "link": 95
+        },
+        {
+          "name": "reference_images.reference_image_2",
+          "shape": 7,
+          "type": "IMAGE,STRING",
+          "link": 96
+        },
+        {
+          "name": "reference_images.reference_image_3",
+          "shape": 7,
+          "type": "IMAGE,STRING",
+          "link": null
+        },
+        {
+          "name": "reference_videos.reference_video_0",
+          "shape": 7,
+          "type": "VIDEO,STRING",
+          "link": 97
+        },
+        {
+          "name": "reference_videos.reference_video_1",
+          "shape": 7,
+          "type": "VIDEO,STRING",
+          "link": null
+        },
+        {
+          "name": "reference_audios.reference_audio_0",
+          "shape": 7,
+          "type": "AUDIO,STRING",
+          "link": 98
+        },
+        {
+          "name": "reference_audios.reference_audio_1",
+          "shape": 7,
+          "type": "AUDIO,STRING",
+          "link": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 99
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": [
+            91
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            92
+          ]
+        },
+        {
+          "name": "task_id",
+          "type": "STRING",
+          "links": [
+            93
+          ]
+        },
+        {
+          "name": "last_frame",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyui-arksd.git",
+        "ver": "1145a34cf4101650ac0b4632b7d872e1316aa622",
+        "Node name for S&R": "ArkSD_Seedance25Flash"
+      },
+      "widgets_values": [
+        "Ark-Main",
+        "",
+        "720p",
+        "adaptive",
+        5,
+        -1,
+        "randomize",
+        false,
+        true,
+        1800,
+        10,
+        false,
+        "mp4",
+        true,
+        false,
+        0,
+        172800
+      ],
+      "widgets_values_named": {
+        "api_key_name": "Ark-Main",
+        "prompt": "",
+        "resolution": "720p",
+        "ratio": "adaptive",
+        "duration": 5,
+        "seed": -1,
+        "control_after_generate": "randomize",
+        "watermark": false,
+        "generate_audio": true,
+        "timeout": 1800,
+        "poll_interval": 10,
+        "non_blocking": false,
+        "output_format": "mp4",
+        "draft": true,
+        "return_last_frame": false,
+        "priority": 0,
+        "execution_expires_after": 172800
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 79,
+      "type": "Note",
+      "pos": [
+        473.65931233994104,
+        4203.223560442274
+      ],
+      "size": [
+        140,
+        60
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Not support yet!!!"
+      ],
+      "widgets_values_named": {
+        "text": "Not support yet!!!"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    }
+  ],
+  "links": [
+    [
+      87,
+      72,
+      0,
+      76,
+      0,
+      "STRING"
+    ],
+    [
+      89,
+      66,
+      0,
+      77,
+      1,
+      "STRING"
+    ],
+    [
+      57,
+      63,
+      0,
+      66,
+      0,
+      "STRING"
+    ],
+    [
+      58,
+      64,
+      0,
+      66,
+      1,
+      "STRING"
+    ],
+    [
+      74,
+      65,
+      0,
+      66,
+      2,
+      "STRING"
+    ],
+    [
+      84,
+      73,
+      0,
+      72,
+      1,
+      "STRING"
+    ],
+    [
+      85,
+      74,
+      0,
+      72,
+      2,
+      "STRING"
+    ],
+    [
+      91,
+      78,
+      0,
+      77,
+      0,
+      "VIDEO"
+    ],
+    [
+      92,
+      78,
+      1,
+      64,
+      0,
+      "INT"
+    ],
+    [
+      93,
+      78,
+      2,
+      65,
+      0,
+      "STRING"
+    ],
+    [
+      94,
+      60,
+      0,
+      78,
+      0,
+      "STRING"
+    ],
+    [
+      95,
+      68,
+      0,
+      78,
+      1,
+      "IMAGE"
+    ],
+    [
+      96,
+      71,
+      0,
+      78,
+      2,
+      "STRING"
+    ],
+    [
+      97,
+      69,
+      0,
+      78,
+      4,
+      "VIDEO"
+    ],
+    [
+      98,
+      70,
+      0,
+      78,
+      6,
+      "AUDIO"
+    ],
+    [
+      99,
+      76,
+      0,
+      78,
+      8,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Load Assets",
+      "bounding": [
+        -1371.9881469072375,
+        3512.3264082518317,
+        1503.390666683131,
+        774.6270560226985
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "LLM for generate video prompt",
+      "bounding": [
+        -1370.864950199317,
+        4316.284734899224,
+        1553.8303643503853,
+        848.7264899742622
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "Connect to Ark Enpoint",
+      "bounding": [
+        204.02816827096666,
+        4194.021543387519,
+        568.5995669678357,
+        918.7253765284522
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "Output",
+      "bounding": [
+        851.7245761960849,
+        3706.569963918848,
+        1096.9597671686663,
+        866.9977810718874
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8383616542070241,
+      "offset": [
+        270.8817193365997,
+        -3426.5377560253123
+      ]
+    },
+    "frontendVersion": "1.58.5",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
