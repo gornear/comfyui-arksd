@@ -567,8 +567,8 @@ class ArkSDSeedance25Flash(io.ComfyNode):
                     "draft",
                     default=True,
                     tooltip=(
-                        "Draft mode: generate a 480p preview first. Feed the task id into "
-                        "ArkSD Draft to Video to produce the 1080p final."
+                        "Draft mode: generate a 480p preview first. The final pass is "
+                        "1080p, which this model does not support, so leave it off."
                     ),
                 ),
             ],
