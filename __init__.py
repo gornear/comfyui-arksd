@@ -88,6 +88,14 @@ except ImportError as exc:  # pragma: no cover - only hit outside ComfyUI
     LOGGER.debug("[ArkSD] last frame node not registered: %s", exc)
 
 try:
+    from .nodes.video_save import ArkSD_SaveVideo
+
+    NODE_CLASS_MAPPINGS["ArkSD_SaveVideo"] = ArkSD_SaveVideo
+    NODE_DISPLAY_NAME_MAPPINGS["ArkSD_SaveVideo"] = "ArkSD Save Video"
+except ImportError as exc:  # pragma: no cover - only hit outside ComfyUI
+    LOGGER.debug("[ArkSD] save video node not registered: %s", exc)
+
+try:
     from .nodes.nodes_llm import ArkSDLLM, ArkSDTexts
 
     NODE_CLASS_MAPPINGS.update(
