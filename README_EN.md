@@ -27,7 +27,7 @@ Ark **assets** (`asset://<id>`) as reference images, videos, and audio.
 
 ```bash
 cd ComfyUI/custom_nodes
-git clone <this-repo> comfyui-arksd
+git clone https://github.com/gornear/comfyui-arksd.git 
 pip install -r comfyui-arksd/requirements.txt
 ```
 
