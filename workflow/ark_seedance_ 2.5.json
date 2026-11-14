@@ -1,8 +1,8 @@
 {
   "id": "c06838b9-acec-4928-b1a7-b780d3e6542d",
   "revision": 0,
-  "last_node_id": 76,
-  "last_link_id": 88,
+  "last_node_id": 77,
+  "last_link_id": 90,
   "nodes": [
     {
       "id": 31,
@@ -71,67 +71,11 @@
       }
     },
     {
-      "id": 62,
-      "type": "SaveVideo",
-      "pos": [
-        1619.4479500996345,
-        3851.093640559433
-      ],
-      "size": [
-        270,
-        602.375
-      ],
-      "flags": {},
-      "order": 16,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "video",
-          "type": "VIDEO",
-          "link": 79
-        },
-        {
-          "name": "filename_prefix",
-          "type": "STRING",
-          "widget": {
-            "name": "filename_prefix"
-          },
-          "link": 61
-        }
-      ],
-      "outputs": [
-        {
-          "name": "video",
-          "type": "VIDEO",
-          "links": []
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.39.2",
-        "Node name for S&R": "SaveVideo"
-      },
-      "widgets_values": [
-        "video/ComfyUI",
-        "mp4",
-        "h264",
-        "auto",
-        "auto"
-      ],
-      "widgets_values_named": {
-        "filename_prefix": "video/ComfyUI",
-        "format": "mp4",
-        "format.codec": "h264",
-        "format.codec.encoding": "auto",
-        "codec": "auto"
-      }
-    },
-    {
       "id": 63,
       "type": "PrimitiveString",
       "pos": [
-        906.4905582749182,
-        3831.3535730268823
+        884.1368369989755,
+        3825.2571168017143
       ],
       "size": [
         270,
@@ -166,8 +110,8 @@
       "id": 64,
       "type": "easy convertAnything",
       "pos": [
-        905.5503534062727,
-        3955.9422201013545
+        883.19663213033,
+        3956.958271913719
       ],
       "size": [
         270,
@@ -209,8 +153,8 @@
       "id": 65,
       "type": "PrimitiveString",
       "pos": [
-        909.4152376026364,
-        4072.04787359646
+        887.0616132273482,
+        4096.4336984971305
       ],
       "size": [
         270,
@@ -254,15 +198,15 @@
       "id": 66,
       "type": "ArkSD_Texts",
       "pos": [
-        1242.3732307699865,
-        3915.5577074596804
+        1238.5877810208417,
+        3894.1069659391196
       ],
       "size": [
         270,
         138
       ],
       "flags": {},
-      "order": 15,
+      "order": 14,
       "mode": 0,
       "inputs": [
         {
@@ -294,7 +238,7 @@
           "name": "text",
           "type": "STRING",
           "links": [
-            61
+            89
           ]
         }
       ],
@@ -387,7 +331,7 @@
           "name": "video",
           "type": "VIDEO",
           "links": [
-            79
+            90
           ]
         },
         {
@@ -407,9 +351,7 @@
         {
           "name": "last_frame",
           "type": "IMAGE",
-          "links": [
-            86
-          ]
+          "links": []
         }
       ],
       "properties": {
@@ -423,7 +365,7 @@
         "480p",
         "adaptive",
         -1,
-        279811741,
+        0,
         "randomize",
         false,
         true,
@@ -443,7 +385,7 @@
         "resolution": "480p",
         "ratio": "adaptive",
         "duration": -1,
-        "seed": 279811741,
+        "seed": 0,
         "control_after_generate": "randomize",
         "watermark": false,
         "generate_audio": true,
@@ -797,43 +739,6 @@
       "bgcolor": "#353"
     },
     {
-      "id": 75,
-      "type": "PreviewImage",
-      "pos": [
-        907.1542423334133,
-        4202.328296935822
-      ],
-      "size": [
-        634.6790786792327,
-        303.1119196093996
-      ],
-      "flags": {},
-      "order": 14,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 86
-        }
-      ],
-      "outputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "links": null
-        }
-      ],
-      "title": "Preview Image (Only return_last _frame=true)",
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.39.2",
-        "Node name for S&R": "PreviewImage"
-      },
-      "widgets_values": [],
-      "widgets_values_named": {}
-    },
-    {
       "id": 76,
       "type": "PreviewAny",
       "pos": [
@@ -870,6 +775,64 @@
       },
       "widgets_values": [],
       "widgets_values_named": {}
+    },
+    {
+      "id": 77,
+      "type": "ArkSD_SaveVideo",
+      "pos": [
+        1591.66054649807,
+        3846.4433660755985
+      ],
+      "size": [
+        270,
+        178
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "link": 90
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": 89
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyui-arksd.git",
+        "ver": "1145a34cf4101650ac0b4632b7d872e1316aa622",
+        "Node name for S&R": "ArkSD_SaveVideo"
+      },
+      "widgets_values": [
+        "video/ArkSD",
+        "mp4",
+        "h264",
+        "medium",
+        23,
+        "flac"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "video/ArkSD",
+        "container": "mp4",
+        "video_codec": "h264",
+        "preset": "medium",
+        "crf": 23,
+        "audio_codec": "flac"
+      }
     }
   ],
   "links": [
@@ -890,27 +853,11 @@
       "STRING"
     ],
     [
-      86,
-      67,
-      3,
-      75,
+      87,
+      72,
       0,
-      "IMAGE"
-    ],
-    [
-      79,
-      67,
+      76,
       0,
-      62,
-      0,
-      "VIDEO"
-    ],
-    [
-      61,
-      66,
-      0,
-      62,
-      1,
       "STRING"
     ],
     [
@@ -978,6 +925,14 @@
       "AUDIO"
     ],
     [
+      88,
+      76,
+      0,
+      67,
+      8,
+      "STRING"
+    ],
+    [
       84,
       73,
       0,
@@ -994,20 +949,20 @@
       "STRING"
     ],
     [
-      87,
-      72,
+      89,
+      66,
       0,
-      76,
-      0,
+      77,
+      1,
       "STRING"
     ],
     [
-      88,
-      76,
-      0,
+      90,
       67,
-      8,
-      "STRING"
+      0,
+      77,
+      0,
+      "VIDEO"
     ]
   ],
   "groups": [
@@ -1063,13 +1018,13 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.5205566275322865,
+      "scale": 0.6298735193140672,
       "offset": [
-        1377.6682325586196,
-        -3209.39859303728
+        294.38255661538244,
+        -3330.96066353101
       ]
     },
-    "frontendVersion": "1.55.17",
+    "frontendVersion": "1.58.5",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,

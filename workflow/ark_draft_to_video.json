@@ -1,8 +1,8 @@
 {
   "id": "abf32ed8-75c4-417e-a071-0d96758c4c6e",
   "revision": 0,
-  "last_node_id": 10,
-  "last_link_id": 6,
+  "last_node_id": 11,
+  "last_link_id": 8,
   "nodes": [
     {
       "id": 1,
@@ -24,7 +24,7 @@
           "name": "video",
           "type": "VIDEO",
           "links": [
-            5
+            8
           ]
         },
         {
@@ -99,8 +99,8 @@
       "id": 5,
       "type": "PrimitiveString",
       "pos": [
-        789.1383529449776,
-        3809.939474873462
+        796.0209341546201,
+        3814.5278623465574
       ],
       "size": [
         270,
@@ -140,7 +140,7 @@
       ],
       "size": [
         270,
-        98
+        118
       ],
       "flags": {},
       "order": 3,
@@ -169,7 +169,7 @@
           "name": "text",
           "type": "STRING",
           "links": [
-            4
+            7
           ]
         }
       ],
@@ -186,15 +186,15 @@
       }
     },
     {
-      "id": 10,
-      "type": "SaveVideo",
+      "id": 11,
+      "type": "ArkSD_SaveVideo",
       "pos": [
-        1087.7956497625928,
-        3824.1131057872826
+        1120.1355531578272,
+        3840.09649246084
       ],
       "size": [
-        711.336979265792,
-        619.8695358882705
+        645.7293560881972,
+        633.6241761307567
       ],
       "flags": {},
       "order": 4,
@@ -203,7 +203,7 @@
         {
           "name": "video",
           "type": "VIDEO",
-          "link": 5
+          "link": 8
         },
         {
           "name": "filename_prefix",
@@ -211,54 +211,40 @@
           "widget": {
             "name": "filename_prefix"
           },
-          "link": 4
+          "link": 7
         }
       ],
       "outputs": [
         {
           "name": "video",
           "type": "VIDEO",
-          "links": []
+          "links": null
         }
       ],
       "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.39.2",
-        "Node name for S&R": "SaveVideo"
+        "aux_id": "comfyui-arksd.git",
+        "ver": "1145a34cf4101650ac0b4632b7d872e1316aa622",
+        "Node name for S&R": "ArkSD_SaveVideo"
       },
       "widgets_values": [
-        "video/ComfyUI",
+        "video/ArkSD",
         "mp4",
         "h264",
-        "auto",
-        "auto"
+        "medium",
+        23,
+        "flac"
       ],
       "widgets_values_named": {
-        "filename_prefix": "video/ComfyUI",
-        "format": "mp4",
-        "format.codec": "h264",
-        "format.codec.encoding": "auto",
-        "codec": "auto"
+        "filename_prefix": "video/ArkSD",
+        "container": "mp4",
+        "video_codec": "h264",
+        "preset": "medium",
+        "crf": 23,
+        "audio_codec": "flac"
       }
     }
   ],
   "links": [
-    [
-      4,
-      8,
-      0,
-      10,
-      1,
-      "STRING"
-    ],
-    [
-      5,
-      1,
-      0,
-      10,
-      0,
-      "VIDEO"
-    ],
     [
       1,
       5,
@@ -274,6 +260,22 @@
       8,
       1,
       "STRING"
+    ],
+    [
+      7,
+      8,
+      0,
+      11,
+      1,
+      "STRING"
+    ],
+    [
+      8,
+      1,
+      0,
+      11,
+      0,
+      "VIDEO"
     ]
   ],
   "groups": [
@@ -293,13 +295,13 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.6928608712454735,
+      "scale": 0.838361654207023,
       "offset": [
-        562.7568147233021,
-        -3336.6229671466126
+        -54.60077269571793,
+        -3393.2527505390767
       ]
     },
-    "frontendVersion": "1.55.17",
+    "frontendVersion": "1.58.5",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,
