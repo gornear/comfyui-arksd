@@ -64,7 +64,7 @@ def write_video(
         video_stream.pix_fmt = "yuv420p"
         video_stream.options = video_encoder_options(encoder, crf, preset)
 
-        audio_stream = _add_audio_stream(out, components.audio, audio_codec, audio_quality, frame_rate, frame_count)
+        audio_stream = _add_audio_stream(out, components.audio, audio_codec, audio_quality)
 
         # isobmff containers reject video-then-audio muxing without rebasing
         # timestamps, so the audio goes in first with an explicit pts.
@@ -82,7 +82,7 @@ def write_video(
             out.mux(packet)
 
 
-def _add_audio_stream(out, audio, audio_codec, audio_quality, frame_rate, frame_count):
+def _add_audio_stream(out, audio, audio_codec, audio_quality):
     """Add the audio stream, or return None when the video has no audio."""
     if audio is None:
         return None
