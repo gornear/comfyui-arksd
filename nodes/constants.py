@@ -44,7 +44,7 @@ MODELS: dict[str, ModelSpec] = {
     "seedance_2_5_flash": ModelSpec(
         model_id="doubao-seedance-2-5-flash-261115",
         resolutions=["480p", "720p"],
-        default_resolution="720p",
+        default_resolution="480p",
         duration_min=4,
         duration_max=30,
         duration_default=5,

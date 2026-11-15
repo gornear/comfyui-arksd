@@ -117,7 +117,7 @@ def test_seedance_25_flash_spec():
     spec = MODELS["seedance_2_5_flash"]
     assert spec.model_id == "doubao-seedance-2-5-flash-261115"
     assert spec.resolutions == ["480p", "720p"]
-    assert spec.default_resolution == "720p"
+    assert spec.default_resolution == "480p"
     assert (spec.duration_min, spec.duration_max, spec.duration_default) == (4, 30, 5)
     assert (spec.max_images, spec.max_videos, spec.max_audios) == (10, 5, 5)
     assert spec.supports_output_format is True
