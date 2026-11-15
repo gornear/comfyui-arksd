@@ -35,6 +35,16 @@ Restart ComfyUI. The nodes appear under the `api node/ArkSD` category.
 
 The only dependency is `httpx`, which ComfyUI already ships.
 
+## Updating
+
+```bash
+cd ComfyUI/custom_nodes/comfyui-arksd
+git pull
+```
+
+Then restart ComfyUI. Run `pip install -r requirements.txt` again only when
+`requirements.txt` changed.
+
 ## Credentials
 
 Two files, both git-ignored, both created by copying the matching `.example`

@@ -34,6 +34,16 @@ pip install -r comfyui-arksd/requirements.txt
 
 唯一依赖是 `httpx`，ComfyUI 已自带。
 
+## 更新
+
+```bash
+cd ComfyUI/custom_nodes/comfyui-arksd
+git pull
+```
+
+然后重启 ComfyUI。`requirements.txt` 有变动时再跑一次
+`pip install -r requirements.txt`。
+
 ## 凭据配置
 
 两个文件，都已被 git 忽略，都由对应的 `.example` 文件复制而来。凭据只从文件
