@@ -1,8 +1,5 @@
 # comfyui-arksd
 
-> **Note: Seedance 2.5 Flash is not callable until 2026-11-15 14:00 Beijing time.**
-> Tasks submitted before then return `ModelNotOpen` or `InvalidParameter`; that is not a node bug.
-
 English | [中文说明](README.md)
 
 ComfyUI nodes for **Volcengine Ark (火山方舟) Seedance 2.x** video generation.
@@ -104,14 +101,17 @@ value. Disconnect it, or turn `return_last_frame` on.
 
 ### Seedance 2.5 Flash
 
-`doubao-seedance-2-5-flash` is the value tier of Seedance 2.5: quality close to
-2.5, roughly twice the generation speed, and a lower price, aimed at batch
-production. It supports **480p / 720p** only, with no 1080p or 4k. Reference
-limits, duration limit, and draft mode match Seedance 2.5.
+`doubao-seedance-2-5-flash-261115` is the value tier of Seedance 2.5: quality
+close to 2.5, roughly twice the generation speed, and about 34% cheaper, aimed
+at batch production.
 
-The model opens for API calls at **2026-11-15 14:00 Beijing time (UTC+8)**.
-Before that, submitting a task returns `ModelNotOpen` or `InvalidParameter`;
-that is not a node bug.
+Differences from Seedance 2.5:
+
+- **480p / 720p** only, with no 1080p or 4k;
+- reference limits are **10 images / 5 videos / 5 audios** (2.5 allows 30 / 10 / 10);
+- **no draft mode**, so the node has no `draft` input.
+
+The 30 s duration limit matches Seedance 2.5.
 
 ## Text generation
 
@@ -180,7 +180,7 @@ Reference limits per model:
 | Model | Images | Videos | Audio |
 |---|---|---|---|
 | Seedance 2.5 | 30 | 10 | 10 |
-| Seedance 2.5 Flash | 30 | 10 | 10 |
+| Seedance 2.5 Flash | 10 | 5 | 5 |
 | Seedance 2.0 / Fast / Mini | 9 | 3 | 3 |
 
 ### Local images are adjusted automatically

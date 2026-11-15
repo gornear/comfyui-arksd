@@ -115,13 +115,13 @@ def test_other_models_have_no_draft_input():
 
 def test_seedance_25_flash_spec():
     spec = MODELS["seedance_2_5_flash"]
-    assert spec.model_id == "doubao-seedance-2-5-flash"
+    assert spec.model_id == "doubao-seedance-2-5-flash-261115"
     assert spec.resolutions == ["480p", "720p"]
     assert spec.default_resolution == "720p"
     assert (spec.duration_min, spec.duration_max, spec.duration_default) == (4, 30, 5)
-    assert (spec.max_images, spec.max_videos, spec.max_audios) == (30, 10, 10)
+    assert (spec.max_images, spec.max_videos, spec.max_audios) == (10, 5, 5)
     assert spec.supports_output_format is True
-    assert spec.supports_draft is True
+    assert spec.supports_draft is False
     assert spec.supports_task_type is False
 
 
@@ -129,20 +129,22 @@ def test_seedance_25_flash_node_schema():
     schema = nodes_video.ArkSDSeedance25Flash.define_schema()
     by_id = {i.id: i for i in schema.inputs}
     assert by_id["resolution"].options == ["480p", "720p"]
-    assert by_id["reference_images"].template.max == 30
-    assert by_id["reference_videos"].template.max == 10
-    assert by_id["reference_audios"].template.max == 10
-    assert by_id["draft"].default is True
+    assert by_id["reference_images"].template.max == 10
+    assert by_id["reference_videos"].template.max == 5
+    assert by_id["reference_audios"].template.max == 5
     assert by_id["output_format"].default == "mp4"
+    assert "draft" not in by_id
     assert "omni_reference_task_type" not in by_id
 
 
-def test_seedance_25_flash_draft_forces_480p():
+def test_seedance_25_flash_body_omits_unsupported_params():
     body = nodes_video.build_body(MODELS["seedance_2_5_flash"], {
         "prompt": "a cat", "resolution": "720p", "ratio": "adaptive",
         "duration": 5, "seed": -1, "watermark": False, "generate_audio": True,
-        "images": [], "videos": [], "audios": [], "draft": True,
+        "images": [], "videos": [], "audios": [],
+        "draft": True, "omni_reference_task_type": "reference",
     })
-    assert body["model"] == "doubao-seedance-2-5-flash"
-    assert body["draft"] is True
-    assert body["resolution"] == "480p"
+    assert body["model"] == "doubao-seedance-2-5-flash-261115"
+    assert body["resolution"] == "720p"
+    assert "draft" not in body
+    assert "omni_reference_task_type" not in body

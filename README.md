@@ -1,8 +1,5 @@
 # comfyui-arksd
 
-> **注意：Seedance 2.5 Flash 需等到北京时间 2026-11-15 14:00 之后才开放 API 调用。**
-> 在此之前提交任务会返回 `ModelNotOpen` 或 `InvalidParameter`，这不是节点的问题。
-
 [English](README_EN.md) | 中文说明
 
 用于 **火山方舟（Volcengine Ark）Seedance 2.x** 视频生成的 ComfyUI 节点。
@@ -100,12 +97,16 @@ pip install -r comfyui-arksd/requirements.txt
 
 ### Seedance 2.5 Flash
 
-`doubao-seedance-2-5-flash` 是 Seedance 2.5 的性价比版本：画质接近 2.5，生成
-速度约两倍，价格更低，适合批量出片。它只支持 **480p / 720p**，没有 1080p 和
-4k；参考素材上限、时长上限和样片模式与 Seedance 2.5 相同。
+`doubao-seedance-2-5-flash-261115` 是 Seedance 2.5 的性价比版本：画质接近
+2.5，生成速度约两倍，价格低约 34%，适合批量出片。
 
-该模型于**北京时间 2026-11-15 14:00** 开放 API 调用。在此之前提交任务会返回
-`ModelNotOpen` 或 `InvalidParameter`，这不是节点的问题。
+与 Seedance 2.5 的差异：
+
+- 只支持 **480p / 720p**，没有 1080p 和 4k；
+- 参考素材上限为 **10 张图 / 5 段视频 / 5 段音频**（2.5 是 30 / 10 / 10）；
+- **不支持样片模式**（`draft`），因此节点上没有该输入。
+
+时长上限（30 秒）与 Seedance 2.5 相同。
 
 ## 文本生成
 
@@ -168,7 +169,7 @@ WAV 不压缩，所以即使时长没超限，特别长的片段也可能先撞�
 | 模型 | 图片 | 视频 | 音频 |
 |---|---|---|---|
 | Seedance 2.5 | 30 | 10 | 10 |
-| Seedance 2.5 Flash | 30 | 10 | 10 |
+| Seedance 2.5 Flash | 10 | 5 | 5 |
 | Seedance 2.0 / Fast / Mini | 9 | 3 | 3 |
 
 ### 本地图片会自动调整

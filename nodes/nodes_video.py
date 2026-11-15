@@ -553,7 +553,7 @@ class ArkSDSeedance25Flash(io.ComfyNode):
             description=(
                 "Doubao Seedance 2.5 Flash video generation. Quality close to 2.5 "
                 "at roughly twice the speed and a lower price, 480p/720p only. "
-                "Up to 30 images, 10 videos and 10 audio references, plus draft mode."
+                "Up to 10 images, 5 videos and 5 audio references."
             ),
             inputs=[
                 *_common_inputs(spec),
@@ -562,14 +562,6 @@ class ArkSDSeedance25Flash(io.ComfyNode):
                     options=OUTPUT_FORMATS,
                     default="mp4",
                     tooltip="mp4 for compatibility, mov for high color fidelity post work.",
-                ),
-                io.Boolean.Input(
-                    "draft",
-                    default=True,
-                    tooltip=(
-                        "Draft mode: generate a 480p preview first. The final pass is "
-                        "1080p, which this model does not support, so leave it off."
-                    ),
                 ),
             ],
             outputs=_outputs(),
