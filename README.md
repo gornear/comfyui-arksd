@@ -2,7 +2,7 @@
 
 [English](README_EN.md) | 中文说明
 
-用于 **火山方舟（Volcengine Ark）Seedance 2.x** 视频生成的 ComfyUI 节点。
+用于 **火山方舟（Volcengine Ark）Seedance 2.5(flash)/2.x** 视频生成的 ComfyUI 节点。
 
 通过异步 HTTP 直接调用方舟视频生成 API，支持把方舟**素材**（`asset://<id>`）
 作为参考图、参考视频和参考音频。
