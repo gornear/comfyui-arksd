@@ -1,8 +1,8 @@
 {
   "id": "c06838b9-acec-4928-b1a7-b780d3e6542d",
   "revision": 0,
-  "last_node_id": 79,
-  "last_link_id": 99,
+  "last_node_id": 80,
+  "last_link_id": 110,
   "nodes": [
     {
       "id": 31,
@@ -54,7 +54,7 @@
           "name": "asset",
           "type": "STRING",
           "links": [
-            94
+            105
           ]
         }
       ],
@@ -118,13 +118,13 @@
         58
       ],
       "flags": {},
-      "order": 13,
+      "order": 12,
       "mode": 0,
       "inputs": [
         {
           "name": "*",
           "type": "*",
-          "link": 92
+          "link": 103
         }
       ],
       "outputs": [
@@ -158,10 +158,10 @@
       ],
       "size": [
         269.23673935469924,
-        57.99999081646412
+        58
       ],
       "flags": {},
-      "order": 14,
+      "order": 13,
       "mode": 0,
       "inputs": [
         {
@@ -170,7 +170,7 @@
           "widget": {
             "name": "value"
           },
-          "link": 93
+          "link": 104
         }
       ],
       "outputs": [
@@ -206,7 +206,7 @@
         138
       ],
       "flags": {},
-      "order": 15,
+      "order": 14,
       "mode": 0,
       "inputs": [
         {
@@ -274,7 +274,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            95
+            106
           ]
         },
         {
@@ -317,7 +317,7 @@
           "name": "VIDEO",
           "type": "VIDEO",
           "links": [
-            97
+            108
           ]
         }
       ],
@@ -355,7 +355,7 @@
           "name": "AUDIO",
           "type": "AUDIO",
           "links": [
-            98
+            109
           ]
         }
       ],
@@ -393,7 +393,7 @@
           "name": "asset",
           "type": "STRING",
           "links": [
-            96
+            107
           ]
         }
       ],
@@ -435,7 +435,7 @@
         735.3518140506458
       ],
       "flags": {},
-      "order": 10,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
@@ -602,7 +602,7 @@
         693.1934007049167
       ],
       "flags": {},
-      "order": 11,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
@@ -616,7 +616,7 @@
           "name": "STRING",
           "type": "STRING",
           "links": [
-            99
+            110
           ]
         }
       ],
@@ -640,13 +640,13 @@
         178
       ],
       "flags": {},
-      "order": 16,
+      "order": 15,
       "mode": 0,
       "inputs": [
         {
           "name": "video",
           "type": "VIDEO",
-          "link": 91
+          "link": 102
         },
         {
           "name": "filename_prefix",
@@ -687,37 +687,37 @@
       }
     },
     {
-      "id": 78,
+      "id": 80,
       "type": "ArkSD_Seedance25Flash",
       "pos": [
-        226.41448664103643,
-        4273.470963691481
+        224.56990956551195,
+        4275.745928598159
       ],
       "size": [
-        519.0893800591126,
-        811.4734892814017
+        525.9599349523623,
+        784.116381485032
       ],
       "flags": {},
-      "order": 12,
+      "order": 11,
       "mode": 0,
       "inputs": [
         {
           "name": "reference_images.reference_image_0",
           "shape": 7,
           "type": "IMAGE,STRING",
-          "link": 94
+          "link": 105
         },
         {
           "name": "reference_images.reference_image_1",
           "shape": 7,
           "type": "IMAGE,STRING",
-          "link": 95
+          "link": 106
         },
         {
           "name": "reference_images.reference_image_2",
           "shape": 7,
           "type": "IMAGE,STRING",
-          "link": 96
+          "link": 107
         },
         {
           "name": "reference_images.reference_image_3",
@@ -729,7 +729,7 @@
           "name": "reference_videos.reference_video_0",
           "shape": 7,
           "type": "VIDEO,STRING",
-          "link": 97
+          "link": 108
         },
         {
           "name": "reference_videos.reference_video_1",
@@ -741,7 +741,7 @@
           "name": "reference_audios.reference_audio_0",
           "shape": 7,
           "type": "AUDIO,STRING",
-          "link": 98
+          "link": 109
         },
         {
           "name": "reference_audios.reference_audio_1",
@@ -755,7 +755,7 @@
           "widget": {
             "name": "prompt"
           },
-          "link": 99
+          "link": 110
         }
       ],
       "outputs": [
@@ -763,21 +763,21 @@
           "name": "video",
           "type": "VIDEO",
           "links": [
-            91
+            102
           ]
         },
         {
           "name": "seed",
           "type": "INT",
           "links": [
-            92
+            103
           ]
         },
         {
           "name": "task_id",
           "type": "STRING",
           "links": [
-            93
+            104
           ]
         },
         {
@@ -788,13 +788,13 @@
       ],
       "properties": {
         "aux_id": "comfyui-arksd.git",
-        "ver": "1145a34cf4101650ac0b4632b7d872e1316aa622",
+        "ver": "9d6f385c510e167e728325d78789834e26527278",
         "Node name for S&R": "ArkSD_Seedance25Flash"
       },
       "widgets_values": [
         "Ark-Main",
         "",
-        "720p",
+        "480p",
         "adaptive",
         5,
         -1,
@@ -805,7 +805,6 @@
         10,
         false,
         "mp4",
-        true,
         false,
         0,
         172800
@@ -813,7 +812,7 @@
       "widgets_values_named": {
         "api_key_name": "Ark-Main",
         "prompt": "",
-        "resolution": "720p",
+        "resolution": "480p",
         "ratio": "adaptive",
         "duration": 5,
         "seed": -1,
@@ -824,39 +823,12 @@
         "poll_interval": 10,
         "non_blocking": false,
         "output_format": "mp4",
-        "draft": true,
         "return_last_frame": false,
         "priority": 0,
         "execution_expires_after": 172800
       },
       "color": "#432",
       "bgcolor": "#653"
-    },
-    {
-      "id": 79,
-      "type": "Note",
-      "pos": [
-        473.65931233994104,
-        4203.223560442274
-      ],
-      "size": [
-        140,
-        60
-      ],
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "properties": {},
-      "widgets_values": [
-        "Not support yet!!!"
-      ],
-      "widgets_values_named": {
-        "text": "Not support yet!!!"
-      },
-      "color": "#322",
-      "bgcolor": "#533"
     }
   ],
   "links": [
@@ -917,74 +889,74 @@
       "STRING"
     ],
     [
-      91,
-      78,
+      102,
+      80,
       0,
       77,
       0,
       "VIDEO"
     ],
     [
-      92,
-      78,
+      103,
+      80,
       1,
       64,
       0,
       "INT"
     ],
     [
-      93,
-      78,
+      104,
+      80,
       2,
       65,
       0,
       "STRING"
     ],
     [
-      94,
+      105,
       60,
       0,
-      78,
+      80,
       0,
       "STRING"
     ],
     [
-      95,
+      106,
       68,
       0,
-      78,
+      80,
       1,
       "IMAGE"
     ],
     [
-      96,
+      107,
       71,
       0,
-      78,
+      80,
       2,
       "STRING"
     ],
     [
-      97,
+      108,
       69,
       0,
-      78,
+      80,
       4,
       "VIDEO"
     ],
     [
-      98,
+      109,
       70,
       0,
-      78,
+      80,
       6,
       "AUDIO"
     ],
     [
-      99,
+      110,
       76,
       0,
-      78,
+      80,
       8,
       "STRING"
     ]
@@ -1042,10 +1014,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.8383616542070241,
+      "scale": 0.6928608712454757,
       "offset": [
-        270.8817193365997,
-        -3426.5377560253123
+        359.8617349302278,
+        -3487.9800595866536
       ]
     },
     "frontendVersion": "1.58.5",
