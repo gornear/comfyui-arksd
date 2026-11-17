@@ -29,7 +29,7 @@ class ModelSpec:
 MODELS: dict[str, ModelSpec] = {
     "seedance_2_5": ModelSpec(
         model_id="doubao-seedance-2-5-260628",
-        resolutions=["480p", "720p", "1080p"],
+        resolutions=["480p", "720p", "1080p", "4k"],
         default_resolution="720p",
         duration_min=4,
         duration_max=30,

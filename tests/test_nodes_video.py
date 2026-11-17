@@ -104,6 +104,24 @@ def test_seedance_25_defaults_to_draft():
     assert _input_defaults(nodes_video.ArkSDSeedance25)["draft"] is True
 
 
+def test_seedance_25_spec():
+    spec = MODELS["seedance_2_5"]
+    assert spec.model_id == "doubao-seedance-2-5-260628"
+    assert spec.resolutions == ["480p", "720p", "1080p", "4k"]
+    assert spec.default_resolution == "720p"
+    assert (spec.duration_min, spec.duration_max, spec.duration_default) == (4, 30, 5)
+    assert (spec.max_images, spec.max_videos, spec.max_audios) == (30, 10, 10)
+    assert spec.supports_output_format is True
+    assert spec.supports_draft is True
+    assert spec.supports_task_type is True
+
+
+def test_seedance_25_node_offers_4k():
+    schema = nodes_video.ArkSDSeedance25.define_schema()
+    by_id = {i.id: i for i in schema.inputs}
+    assert by_id["resolution"].options == ["480p", "720p", "1080p", "4k"]
+
+
 def test_other_models_have_no_draft_input():
     for node_cls in (
         nodes_video.ArkSDSeedance20,

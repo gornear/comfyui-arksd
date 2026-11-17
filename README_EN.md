@@ -96,7 +96,7 @@ value. Disconnect it, or turn `return_last_frame` on.
 |---|---|
 | **ArkSD Asset** | Pick an asset from your Ark library; outputs `asset://<id>` |
 | **ArkSD Asset (Manual ID)** | Type an asset id directly; for authorized assets the list cannot show |
-| **ArkSD Seedance 2.5** | Seedance 2.5 generation, including draft mode |
+| **ArkSD Seedance 2.5** | Seedance 2.5 generation, including draft mode (supports 4k) |
 | **ArkSD Seedance 2.5 Flash** | Quality close to 2.5, roughly twice the speed and cheaper, 480p/720p only |
 | **ArkSD Seedance 2.0** | Seedance 2.0 generation (supports 4k) |
 | **ArkSD Seedance 2.0 Fast** | Cheaper and faster, 480p/720p |
@@ -117,7 +117,7 @@ at batch production.
 
 Differences from Seedance 2.5:
 
-- **480p / 720p** only, with no 1080p or 4k;
+- **480p / 720p** only, with no 1080p or 4k (the 2.5 flagship goes up to 4k);
 - reference limits are **10 images / 5 videos / 5 audios** (2.5 allows 30 / 10 / 10);
 - **no draft mode**, so the node has no `draft` input.
 
@@ -269,6 +269,9 @@ Ark accepts only one group type per request, so `All` costs two API calls.
 `draft` is **on by default** for Seedance 2.5. While it is on, `resolution` is
 locked to `480p` in the node UI, because Ark rejects any other resolution for a
 draft. Turn it off to generate the final video directly.
+
+Ark only accepts `1080p` for the final pass of a draft, so **4k requires draft
+to be off**.
 
 ```
 ArkSD Seedance 2.5 (draft=true, resolution=480p)

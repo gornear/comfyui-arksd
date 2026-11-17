@@ -92,7 +92,7 @@ git pull
 |---|---|
 | **ArkSD Asset** | 从方舟素材库选择素材，输出 `asset://<id>` |
 | **ArkSD Asset (Manual ID)** | 直接手填素材 ID，用于列表看不到的授权素材 |
-| **ArkSD Seedance 2.5** | Seedance 2.5 生成，含样片模式 |
+| **ArkSD Seedance 2.5** | Seedance 2.5 生成，含样片模式（支持 4k） |
 | **ArkSD Seedance 2.5 Flash** | 画质接近 2.5，速度约两倍、价格更低，仅 480p/720p |
 | **ArkSD Seedance 2.0** | Seedance 2.0 生成（支持 4k） |
 | **ArkSD Seedance 2.0 Fast** | 更快更便宜，仅 480p/720p |
@@ -112,7 +112,7 @@ git pull
 
 与 Seedance 2.5 的差异：
 
-- 只支持 **480p / 720p**，没有 1080p 和 4k；
+- 只支持 **480p / 720p**，没有 1080p 和 4k（2.5 旗舰版最高 4k）；
 - 参考素材上限为 **10 张图 / 5 段视频 / 5 段音频**（2.5 是 30 / 10 / 10）；
 - **不支持样片模式**（`draft`），因此节点上没有该输入。
 
@@ -251,6 +251,8 @@ ArkSD Seedance 2.5 ──VIDEO──> SaveVideo
 
 Seedance 2.5 的 `draft` **默认开启**。开启期间节点界面上的 `resolution` 会
 被锁定为 `480p`，因为方舟对样片只接受这一种分辨率。关闭它即可直接生成成片。
+
+样片成片阶段方舟只接受 `1080p`，因此**要出 4k 必须关闭 `draft`**。
 
 ```
 ArkSD Seedance 2.5（draft=true, resolution=480p）

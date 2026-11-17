@@ -1,4 +1,4 @@
-"""The four Seedance generation nodes.
+"""The five Seedance generation nodes.
 
 Each model gets its own node because their parameter sets differ and because
 ``io.Autogrow`` maxima are fixed at node-definition time: a single node with a
@@ -509,7 +509,8 @@ class ArkSDSeedance25(io.ComfyNode):
             category="api node/ArkSD",
             description=(
                 "Doubao Seedance 2.5 video generation. Supports up to 30 images, "
-                "10 videos and 10 audio references, draft mode, and video edit/extend."
+                "10 videos and 10 audio references, draft mode, 4k output, and "
+                "video edit/extend."
             ),
             inputs=[
                 *_common_inputs(spec),
@@ -524,7 +525,8 @@ class ArkSDSeedance25(io.ComfyNode):
                     default=True,
                     tooltip=(
                         "Draft mode: generate a 480p preview first. Feed the task id into "
-                        "ArkSD Draft to Video to produce the 1080p final."
+                        "ArkSD Draft to Video to produce the 1080p final. Ark only accepts "
+                        "1080p for the final pass, so turn draft off to generate 4k."
                     ),
                 ),
                 io.Combo.Input(
