@@ -279,8 +279,10 @@ ArkSD Seedance 2.5 (draft=true, resolution=480p)
     └── task_id   -> ArkSD Draft to Video -> VIDEO (1080p) -> SaveVideo
 ```
 
-Draft mode is two separately billed tasks. The draft task id is valid for 7
-days. `ArkSD Draft to Video` reuses the draft's prompt, references, duration,
+Draft mode is two separately billed tasks. The draft task id is valid for **14
+days** when created on or after 2026-10-28 10:00 (UTC+8), and 7 days for drafts
+created before that. An expired draft id can no longer produce a final video.
+`ArkSD Draft to Video` reuses the draft's prompt, references, duration,
 ratio, seed, and audio setting automatically; it only lets you re-specify
 `output_format`, `watermark`, `return_last_frame`, `priority`, and
 `execution_expires_after`.
@@ -372,8 +374,11 @@ Open) and retry.
 
 ## Notes
 
-- Task ids and video URLs are only kept for a limited time. Video URLs expire
-  after 24 hours, and Seedance 2.5 video URLs have a 100-download limit.
+- Task ids and video URLs are only kept for a limited time. A regular video task
+  id is valid for 7 days; a draft task id is valid for 14 days (7 days for
+  drafts created before 2026-10-28 10:00 UTC+8). An expired id can no longer be
+  queried or turned into a final video. Video URLs expire after 24 hours, and
+  Seedance 2.5 video URLs have a 100-download limit.
 - The task list only shows the last 7 days of tasks.
 - Seedance 2.5 and 2.0 do not accept reference images or videos containing a
   real human face directly. Use an authorized asset from your asset library

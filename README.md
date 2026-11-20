@@ -260,7 +260,9 @@ ArkSD Seedance 2.5（draft=true, resolution=480p）
     └── task_id   -> ArkSD Draft to Video -> VIDEO（1080p）-> SaveVideo
 ```
 
-样片模式是两个独立计费的任务。样片任务 ID 有效期为 7 天。
+样片模式是两个独立计费的任务。样片任务 ID 的有效期取决于创建时间：2026 年
+10 月 28 日 10:00（UTC+8）及之后创建的是 **14 天**，此前创建的仍是 7 天。
+超期后无法再用该 ID 生成成片。
 `ArkSD Draft to Video` 会自动复用样片阶段的提示词、参考素材、时长、宽高比、
 随机种子和音频设置；它只允许你重新指定 `output_format`、`watermark`、
 `return_last_frame`、`priority` 和 `execution_expires_after`。
@@ -345,7 +347,9 @@ ComfyUI 才能看到。仅修改已有条目的密钥值则立即生效。
 
 ## 备注
 
-- 任务 ID 和视频 URL 只保留有限时间。视频 URL 在 24 小时后失效，Seedance 2.5
+- 任务 ID 和视频 URL 只保留有限时间。普通视频任务 ID 有效期为 7 天；Draft
+  任务 ID 为 14 天（2026 年 10 月 28 日 10:00（UTC+8）之前创建的仍为 7 天）。
+  超期后无法再用该 ID 查询或转成片。视频 URL 在 24 小时后失效，Seedance 2.5
   的视频 URL 有 100 次下载上限。
 - 任务列表只显示最近 7 天的任务。
 - Seedance 2.5 和 2.0 不接受直接上传含真人人脸的参考图或视频。请改用素材库中
