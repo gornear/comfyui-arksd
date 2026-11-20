@@ -57,9 +57,13 @@ function buildTaskList(node) {
 		el("option", { value: "10" }, "10"),
 		el("option", { value: "20", selected: "" }, "20"),
 		el("option", { value: "50" }, "50"),
+		el("option", { value: "100" }, "100"),
 	]);
 
 	const refreshButton = el("button", { type: "button" }, "Refresh");
+	const prevButton = el("button", { type: "button" }, "Prev");
+	const nextButton = el("button", { type: "button" }, "Next");
+	const pageLabel = el("span", { style: { fontSize: "11px", color: "#aaa" } }, "1 / 1");
 	const status = el("div", { style: { fontSize: "11px", color: "#aaa", minHeight: "14px" } });
 	const list = el("div", {
 		style: { display: "flex", flexDirection: "column", gap: "6px", maxHeight: "420px", overflowY: "auto" },
@@ -75,7 +79,13 @@ function buildTaskList(node) {
 		el("label", { style: { display: "flex", gap: "4px", alignItems: "center", fontSize: "11px" } }, ["size", pageSizeSelect]),
 	]);
 
-	container.append(toolbar, status, list);
+	const pager = el("div", { style: { display: "flex", gap: "6px", alignItems: "center", fontSize: "11px" } }, [
+		prevButton,
+		pageLabel,
+		nextButton,
+	]);
+
+	container.append(toolbar, status, list, pager);
 
 	// Track video elements so they can be released before a re-render.
 	const activeVideos = new Set();
@@ -216,22 +226,44 @@ function buildTaskList(node) {
 		);
 	}
 
+	// Current page, clamped to the page count the backend reports.
+	let pageNum = 1;
+	let pageCount = 1;
+
+	function updatePager() {
+		pageLabel.textContent = `${pageNum} / ${pageCount}`;
+		prevButton.disabled = pageNum <= 1;
+		nextButton.disabled = pageNum >= pageCount;
+	}
+
 	async function refresh() {
 		status.textContent = "Loading tasks…";
 		try {
 			const payload = await fetchJson("/arksd/tasks", {
 				api_key_name: widgetValue(node, "api_key_name", ""),
 				status: statusSelect.value,
-				page_num: 1,
+				page_num: pageNum,
 				page_size: pageSizeSelect.value,
 			});
 			releaseVideos();
 			const items = payload.items || [];
+			const total = payload.total ?? items.length;
+			const size = Number(pageSizeSelect.value) || 20;
+			pageCount = Math.max(1, Math.ceil(total / size));
+			// The task list shrinks as old tasks expire, so a page can vanish
+			// while it is being viewed. Fall back to the last real page.
+			if (pageNum > pageCount) {
+				pageNum = pageCount;
+				updatePager();
+				await refresh();
+				return;
+			}
 			list.replaceChildren(...items.map(renderCard));
 			if (!items.length) {
 				list.append(el("div", { style: { fontSize: "12px", color: "#888", padding: "6px" } }, "No tasks found."));
 			}
-			status.textContent = `${items.length} of ${payload.total ?? items.length} tasks.`;
+			updatePager();
+			status.textContent = `${items.length} of ${total} tasks.`;
 		} catch (error) {
 			status.textContent = `Task list failed: ${error.message}`;
 		}
@@ -254,8 +286,24 @@ function buildTaskList(node) {
 	}
 
 	refreshButton.addEventListener("click", () => refresh());
-	statusSelect.addEventListener("change", () => refresh());
-	pageSizeSelect.addEventListener("change", () => refresh());
+	statusSelect.addEventListener("change", () => {
+		pageNum = 1;
+		refresh();
+	});
+	pageSizeSelect.addEventListener("change", () => {
+		pageNum = 1;
+		refresh();
+	});
+	prevButton.addEventListener("click", () => {
+		if (pageNum <= 1) return;
+		pageNum -= 1;
+		refresh();
+	});
+	nextButton.addEventListener("click", () => {
+		if (pageNum >= pageCount) return;
+		pageNum += 1;
+		refresh();
+	});
 	autoRefresh.addEventListener("change", () => {
 		if (autoRefresh.checked) startPolling();
 		else stopPolling();

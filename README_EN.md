@@ -105,7 +105,7 @@ value. Disconnect it, or turn `return_last_frame` on.
 | **ArkSD Query Task** | Fetch one task by id and wait for its video; outputs the video, seed, status, and the task id |
 | **ArkSD Last Frame** | Read the last frame of a video without decoding all of it |
 | **ArkSD Save Video** | Save a video with a selectable flac / mp3 / aac audio codec |
-| **ArkSD Task List** | Browse, auto-refresh, and cancel tasks (UI only) |
+| **ArkSD Task List** | Browse, auto-refresh, page through, and cancel tasks (UI only) |
 | **ArkSD LLM** | Call Ark's chat completions endpoint; returns text, up to 5 images |
 | **ArkSD Texts** | Concatenate up to 10 text inputs into one string |
 

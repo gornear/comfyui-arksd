@@ -101,7 +101,7 @@ git pull
 | **ArkSD Query Task** | 按任务 ID 查询并等待出片；输出视频、种子、状态和该任务 ID |
 | **ArkSD Last Frame** | 读取视频的最后一帧，无需全量解码 |
 | **ArkSD Save Video** | 保存视频，音频编码可选 flac / mp3 / aac |
-| **ArkSD Task List** | 浏览、自动刷新、取消任务（纯 UI） |
+| **ArkSD Task List** | 浏览、自动刷新、翻页、取消任务（纯 UI） |
 | **ArkSD LLM** | 调用方舟对话接口，返回文本，最多 5 张图 |
 | **ArkSD Texts** | 把最多 10 段文本拼接成一段 |
 
